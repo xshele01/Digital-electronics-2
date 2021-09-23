@@ -20,7 +20,10 @@
  * directives. This is a common mistake.
  */
 #define LED_GREEN   PB5 // AVR pin where green LED is connected
-#define SHORT_DELAY 150 // Delay in milliseconds
+#define DOT 500         // Delay in milliseconds
+#define COMMA 1000  
+#define PAUSE_SHORT 250
+#define PAUSE_LONG 2000
 #ifndef F_CPU           // Preprocessor directive allows for conditional
                         // compilation. The #ifndef means "if not defined".
 # define F_CPU 16000000 // CPU frequency in Hz required for delay
@@ -39,25 +42,65 @@
  * Purpose:  Toggle one LED and use delay library.
  * Returns:  none
  **********************************************************************/
-int main(void)
+void led_on(void)
 {
     // Set pin as output in Data Direction Register
     // DDRB = DDRB or 0010 0000
     DDRB = DDRB | (1<<LED_GREEN);
+}
 
+void led_off(void)
+{
     // Set pin LOW in Data Register (LED off)
     // PORTB = PORTB and 1101 1111
     PORTB = PORTB & ~(1<<LED_GREEN);
+}
 
+void dot(void)
+{
+    // Invert LED in Data Register
+    // PORTB = PORTB or 0010 0000
+    led_on();
+    _delay_ms(DOT);
+    led_off();
+    _delay_ms(PAUSE_SHORT);
+}
+
+void comma(void)
+{
+    led_on();
+    _delay_ms(COMMA);
+    led_off();
+    _delay_ms(PAUSE_SHORT);
+}
+
+
+int main(void)
+{
     // Infinite loop
     while (1)
     {
         // Pause several milliseconds
-        _delay_ms(SHORT_DELAY);
-
-        // Invert LED in Data Register
-        // PORTB = PORTB xor 0010 0000
-        PORTB = PORTB ^ (1<<LED_GREEN);
+        // D in Morse code
+        comma();
+        dot();
+        dot();
+        
+        _delay_ms(PAUSE_LONG);
+        
+        // E in Morse code
+        dot();
+        
+        _delay_ms(PAUSE_LONG);
+        
+        // 2 in Morse code
+        dot();
+        dot();
+        comma();
+        comma();
+        comma();
+        
+        _delay_ms(PAUSE_LONG);
     }
 
     // Will never reach this
