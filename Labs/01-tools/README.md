@@ -5,7 +5,7 @@ My `Digital-electronics-2` GitHub repository:
 https://github.com/xshele01/Digital-electronics-2
 
 
-### Blink example
+## Blink example
 
 1. C programming language contains following binary operators:
    * `|` - bitwise OR
@@ -25,7 +25,7 @@ https://github.com/xshele01/Digital-electronics-2
 | 1 | 1 | 1 | 1 | 0 | 0 |
 
 
-### Morse code
+## Morse code
 
 1. Listing of C code with syntax highlighting which repeats one "dot" and one "comma" (letter `A`) on a LED:
 
