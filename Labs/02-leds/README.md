@@ -29,7 +29,7 @@ https://github.com/xshele01/Digital-electronics-2
 | **DDRB** | **Description** |
 | :-: | :-- |
 | 0 | Input pin |
-| 1 | |
+| 1 |  |
 
 | **PORTB** | **Description** |
 | :-: | :-- |
@@ -39,9 +39,37 @@ https://github.com/xshele01/Digital-electronics-2
 | **DDRB** | **PORTB** | **Direction** | **Internal pull-up resistor** | **Description** |
 | :-: | :-: | :-: | :-: | :-- |
 | 0 | 0 | input | no | Tri-state, high-impedance |
-| 0 | 1 | | | |
+| 0 | 1 | input | yes | Pxn will source current if ext. pulled low |
 | 1 | 0 | | | |
 | 1 | 1 | | | |
+
+| **Port** | **Pin** | **Input/output usage?** |
+| :-: | :-: | :-: |
+| A | x | Microcontroller ATmega328P does not contain port A | 
+| B | 0 | Pin 8 |
+|  | 1 | Pin ~9 |
+|  | 2 | Pin ~10 |
+|  | 3 | Pin ~11 | 
+|  | 4 | Pin 12 |
+|  | 5 | Pin 13 |
+|  | 6 |  |
+|  | 7 |  | 
+| C | 0 | Pin A0 |
+|  | 1 | Pin A1 |
+|  | 2 | Pin A2 |
+|  | 3 | Pin A3 | 
+|  | 4 | Pin A4 |
+|  | 5 | Pin A5 |
+|  | 6 |  |
+|  | 7 |  | 
+| D | 0 | Pin RX<-0 |
+|  | 1 | Pin TX->1 |
+|  | 2 | 2 |
+|  | 3 | ~3 |
+|  | 4 | 4 |
+|  | 5 | ~5 |
+|  | 6 | ~6 |
+|  | 7 | 7 |
 
 2. Part of the C code listing with syntax highlighting, which blinks alternately with a pair of LEDs; let one LED is connected to port B and the other to port C:
 
