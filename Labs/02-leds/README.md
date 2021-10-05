@@ -1,9 +1,4 @@
-# Lab 2: Pavlo Shelemba
-
-My `Digital-electronics-2` GitHub repository:
-
-https://github.com/xshele01/Digital-electronics-2
-
+# Lab 2 Control of GPIO, LED, push button
 ## Preparation tasks
 
 1. Two basic ways to connect a LED to the output pin of the microcontroller: 
@@ -98,29 +93,3 @@ int main(void)
     return 0;
 }
 ```
-
-
-## Push button
-
-1. Part of the C code listing with syntax highlighting, which toggles LEDs only if push button is pressed. Otherwise, the value of the LEDs does not change. Let the push button is connected to port D:
-
-```c
-    // Configure Push button at port D and enable internal pull-up resistor
-    // WRITE YOUR CODE HERE
-
-    // Infinite loop
-    while (1)
-    {
-        // Pause several milliseconds
-        _delay_ms(BLINK_DELAY);
-
-        // WRITE YOUR CODE HERE
-    }
-```
-
-
-## Knight Rider
-
-1. Scheme of Knight Rider application, i.e. connection of AVR device, five LEDs, resistors, one push button, and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
-
-   ![your figure]()

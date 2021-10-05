@@ -12,8 +12,8 @@
 
 /* Defines -----------------------------------------------------------*/
 #define LED_GREEN       PB5     // AVR pin where green LED is connected
-#define LED_BREADBOAD   PC5     // AVR pin where green LED is connected
-#define PUSH_BREADBOAD  PD4     // AVR pin where green LED is connected
+#define LED_BREADBOAD   PC5     // AVR pin where breadboard LED is connected
+#define PUSH_BREADBOAD  PD4     // AVR pin where push button LED is connected
 #define BLINK_DELAY     500
 #ifndef F_CPU
 # define F_CPU          16000000     // CPU frequency in Hz required for delay
@@ -45,18 +45,15 @@ int main(void)
     PORTC = PORTC & ~(1<<LED_BREADBOAD);
 
     // Configure Push button at port D and enable internal pull-up resistor
-    // Set pin as output in Data Direction Register...
     DDRD = DDRD & ~(1<<PUSH_BREADBOAD);
-    // ...and turn LED off in Data Register
     PORTD = PORTD | (1<<PUSH_BREADBOAD);
-
 
     // Infinite loop
     while (1)
     {
-        // Pause several milliseconds
-        // _delay_ms(BLINK_DELAY);
-    
+		// Pause several milliseconds
+		_delay_ms(BLINK_DELAY);
+				
         if(bit_is_clear(PIND, PUSH_BREADBOAD))
         {
             PORTB = PORTB ^ (1<<LED_GREEN);
