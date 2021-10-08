@@ -1,4 +1,4 @@
-# Lab 2: PAVLO SHELEMBA
+# Lab 2: Pavlo Shemenba
 
 Link to my `Digital-electronics-2` GitHub repository:
 
