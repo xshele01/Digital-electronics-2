@@ -27,7 +27,7 @@ uint8_t buttonPushed(volatile uint8_t *reg_name, uint8_t pin_num)
 		if (bit_is_clear(*reg_name, pin_num))
 			++debounce;
 		else
-			debounce = 0;
+			return 0;
 			
 		_delay_ms(10);
 		

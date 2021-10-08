@@ -32,21 +32,21 @@ uint8_t buttonPushed(volatile uint8_t *reg_name, uint8_t pin_num)
 	while (1)
 	{
 		if (!GPIO_read(reg_name, pin_num))
-		++debounce;
+			++debounce;
 		else
-		debounce = 0;
+			return 0;
 		
 		_delay_ms(10);
 		
 		if (debounce == 4)
-		return 1;
+			return 1;
 	}
 }
 
 int main(void)
 {
     // Configure pedestrian traffic light and set Red LED HIGH
-    GPIO_config_output(&DDRB, LED_RED_P);
+	GPIO_config_output(&DDRB, LED_RED_P);
 	GPIO_write_high(&PORTB, LED_RED_P);
 	GPIO_config_output(&DDRB, LED_GRN_P);
 	GPIO_write_low(&PORTB, LED_GRN_P);
@@ -71,19 +71,20 @@ int main(void)
 			GPIO_toggle(&PORTC, LED_GRN_C); // Car        Green  LED 1 -> 0
 			GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 0 -> 1
 			_delay_ms(BLINK_DELAY * 3);     // Wait on    Yellow
-	        GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 1 -> 0
-	        GPIO_toggle(&PORTC, LED_RED_C); // Car        Red    LED 0 -> 1
-	        GPIO_toggle(&PORTB, LED_RED_P); // Pedestrian Red    LED 1 -> 0
-	        GPIO_toggle(&PORTB, LED_GRN_P); // Pedestrian Green  LED 0 -> 1
-	        _delay_ms(BLINK_DELAY * 5);     // Wait on    Red
-	        GPIO_toggle(&PORTC, LED_RED_C);	// Car        Red    LED 1 -> 0 
-	        GPIO_toggle(&PORTC, LED_YLW_C);	// Car        Yellow LED 0 -> 1
-	        _delay_ms(BLINK_DELAY * 3);     // Wait on    Yellow
-	        GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 1 -> 0
-	        GPIO_toggle(&PORTC, LED_GRN_C); // Car        Green  LED 0 -> 1
-	        GPIO_toggle(&PORTB, LED_GRN_P); // Pedestrian Green  LED 1 -> 0
-	        GPIO_toggle(&PORTB, LED_RED_P); // Pedestrian Red    LED 0 -> 1
-	        _delay_ms(BLINK_DELAY);
+			GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 1 -> 0
+			GPIO_toggle(&PORTC, LED_RED_C); // Car        Red    LED 0 -> 1
+			GPIO_toggle(&PORTB, LED_RED_P); // Pedestrian Red    LED 1 -> 0
+			GPIO_toggle(&PORTB, LED_GRN_P); // Pedestrian Green  LED 0 -> 1
+			_delay_ms(BLINK_DELAY * 5);     // Wait on    Red
+			GPIO_toggle(&PORTC, LED_RED_C);	// Car        Red    LED 1 -> 0 
+			GPIO_toggle(&PORTC, LED_YLW_C);	// Car        Yellow LED 0 -> 1
+			_delay_ms(BLINK_DELAY * 3);     // Wait on    Yellow
+			GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 1 -> 0
+			GPIO_toggle(&PORTC, LED_GRN_C); // Car        Green  LED 0 -> 1
+			GPIO_toggle(&PORTB, LED_GRN_P); // Pedestrian Green  LED 1 -> 0
+			GPIO_toggle(&PORTB, LED_RED_P); // Pedestrian Red    LED 0 -> 1
+			_delay_ms(BLINK_DELAY);
+			
 			while (!buttonPushed(&PIND, PUSH_BTN))
 				continue;
         }
