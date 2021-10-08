@@ -25,7 +25,7 @@ https://github.com/xshele01/Digital-electronics-2
 | 1 | 0 | output | no | Output Low (Sink) |
 | 1 | 1 | output | no | Output High (Source) |
 
-2. Part of the C code listing with syntax highlighting, which blinks alternately with a pair of LEDs; let one LED is connected to port B and the other to port C:
+1. Part of the C code, which blinks alternately with a pair of LEDs; one LED is connected to port B and the other to port C:
 
 ```c
 int main(void)
@@ -59,7 +59,7 @@ int main(void)
 
 ## Push button
 
-1. Part of the C code listing with syntax highlighting, which toggles LEDs only if push button is pressed. Otherwise, the value of the LEDs does not change. Let the push button is connected to port D:
+1. Part of the C code, which toggles LEDs only when push button is pressed. Otherwise, the values of the LEDs do not change. Push button is connected to port D:
 
 ```c
     // Configure Push button at port D and enable internal pull-up resistor
@@ -83,6 +83,6 @@ int main(void)
 
 ## Knight Rider
 
-1. Scheme of Knight Rider application, i.e. connection of AVR device, five LEDs, resistors, one push button, and supply voltage. The image can be drawn on a computer or by hand. Always name all components and their values!
+1. Scheme of Knight Rider application (connection of AVR device, LEDs, resistors, push button and supply voltage):
 
 ![Scheme of Knight Rider application](Images/knight_rider.svg)

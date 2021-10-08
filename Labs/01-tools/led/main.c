@@ -4,7 +4,7 @@
  * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2018-Present Tomas Fryza
- * Copyright (c) 2021 Shelemba Pavlo
+ * Copyright (c) 2021 Pavlo Shelemba
  * Dept. of Radio Electronics, Brno University of Technology, Czechia
  * This work is licensed under the terms of the MIT license.
  * 
@@ -21,10 +21,7 @@
  * directives. This is a common mistake.
  */
 #define LED_GREEN   PB5 // AVR pin where green LED is connected
-#define DOT 500         // Delay in milliseconds
-#define COMMA 1000  
-#define PAUSE_SHORT 250
-#define PAUSE_LONG 2000
+#define SHORT_DELAY 250 // Delay in milliseconds
 #ifndef F_CPU           // Preprocessor directive allows for conditional
                         // compilation. The #ifndef means "if not defined".
 # define F_CPU 16000000 // CPU frequency in Hz required for delay
@@ -39,71 +36,65 @@
 
 /* Function definitions ----------------------------------------------*/
 /**********************************************************************
- * Function: Main function where the program execution begins
- * Purpose:  Toggle one LED and use delay library.
+ * Function: Dot function
+ * Purpose:  Toggle LED to display dot in Morse code.
  * Returns:  none
  **********************************************************************/
-void led_on(void)
-{
-    // Set pin as output in Data Direction Register
-    // DDRB = DDRB or 0010 0000
-    DDRB = DDRB | (1<<LED_GREEN);
-}
-
-void led_off(void)
-{
-    // Set pin LOW in Data Register (LED off)
-    // PORTB = PORTB and 1101 1111
-    PORTB = PORTB & ~(1<<LED_GREEN);
-}
-
 void dot(void)
 {
-    // Invert LED in Data Register
-    // PORTB = PORTB or 0010 0000
-    led_on();
-    _delay_ms(DOT);
-    led_off();
-    _delay_ms(PAUSE_SHORT);
+    // Set pin HIGH in Data Register (LED on)
+    PORTB = PORTB | (1<<LED_GREEN);
+    _delay_ms(SHORT_DELAY * 2);
+    // Set pin LOW in Data Register (LED off)
+    PORTB = PORTB & ~(1<<LED_GREEN);
+    _delay_ms(SHORT_DELAY);
 }
-
-void comma(void)
+/**********************************************************************
+ * Function: Dash function
+ * Purpose:  Toggle LED to display dash in Morse code.
+ * Returns:  none
+ **********************************************************************/
+void dash(void)
 {
-    led_on();
-    _delay_ms(COMMA);
-    led_off();
-    _delay_ms(PAUSE_SHORT);
+    PORTB = PORTB | (1<<LED_GREEN);
+    _delay_ms(SHORT_DELAY * 4);
+    PORTB = PORTB & ~(1<<LED_GREEN);
+    _delay_ms(SHORT_DELAY);
 }
-
-
+/**********************************************************************
+ * Function: Main function where the program execution begins
+ * Purpose:  Toggle LED to display Morse code.
+ * Returns:  none
+ **********************************************************************/
 int main(void)
 {
+    // Set pin as output in Data Direction Register
+    DDRB = DDRB | (1<<LED_GREEN);
+    PORTB = PORTB & ~(1<<LED_GREEN);
+
     // Infinite loop
     while (1)
     {
         // Pause several milliseconds
         // D in Morse code
-        comma();
-        dot();
+        dash();
+        dot(); 
         dot();
         
-        _delay_ms(PAUSE_LONG);
+        _delay_ms(SHORT_DELAY * 8);
         
         // E in Morse code
         dot();
         
-        _delay_ms(PAUSE_LONG);
+        _delay_ms(SHORT_DELAY * 8);
         
         // 2 in Morse code
         dot();
         dot();
-        comma();
-        comma();
-        comma();
+        dash();
+        dash();
+        dash();
         
-        _delay_ms(PAUSE_LONG);
+        _delay_ms(SHORT_DELAY * 8);
     }
-
-    // Will never reach this
-    return 0;
 }
