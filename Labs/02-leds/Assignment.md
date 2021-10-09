@@ -6,7 +6,7 @@ https://github.com/xshele01/Digital-electronics-2
 
 ## Active-low and active-high LEDs
 
-1. Complete tables according to the AVR manual.
+1. According to the AVR manual:
 
 | **DDRB** | **Description** |
 | :-: | :-- |
@@ -59,7 +59,7 @@ int main(void)
 
 ## Push button
 
-1. Part of the C code, which toggles LEDs only when push button is pressed. Otherwise, the values of the LEDs do not change. Push button is connected to port D:
+1. Part of the C code, wich toggles LEDs when a push button is pressed. Otherwise, the values of the LEDs do not change. The button is connected to port D:
 
 ```c
     // Configure Push button at port D and enable internal pull-up resistor

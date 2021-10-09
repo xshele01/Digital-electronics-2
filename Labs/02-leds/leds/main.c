@@ -1,22 +1,22 @@
 /***********************************************************************
  * 
- * Alternately toggle two LEDs when a push button is pressed.
+ * Alternately toggle two LEDs when a push button is pressed
  * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2018-Present Tomas Fryza
  * Copyright (c) 2021 Pavlo Shelemba
  * Dept. of Radio Electronics, Brno University of Technology, Czechia
- * This work is licensed under the terms of the MIT license.
+ * This work is licensed under the terms of the MIT license
  * 
  **********************************************************************/
 
 /* Defines -----------------------------------------------------------*/
-#define LED_GREEN       PB5     // AVR pin where green LED is connected
-#define LED_BREAD       PC5     // AVR pin where breadboard LED is connected
-#define PUSH            PD4     // AVR pin where push button LED is connected
+#define LED_GREEN       PB5      // Green LED pin
+#define LED_BREAD       PC5      // Breadboard LED pin
+#define PUSH            PD4      // Push Button pin
 #define BLINK_DELAY     500
 #ifndef F_CPU
-# define F_CPU          16000000     // CPU frequency in Hz required for delay
+# define F_CPU          16000000 // CPU frequency in Hz required for delay
 #endif
 
 /* Includes ----------------------------------------------------------*/
@@ -32,20 +32,20 @@
  **********************************************************************/
 uint8_t buttonPushed(volatile uint8_t *reg_name, uint8_t pin_num)
 {
-	int8_t debounce = 0;
+    int8_t debounce = 0;
 
-	while (1)
-	{
-		if (bit_is_clear(*reg_name, pin_num))
-			++debounce;
-		else
-			return 0;
+    while (1)
+    {
+        if (bit_is_clear(*reg_name, pin_num))
+            ++debounce;
+        else
+            return 0;
 
-		_delay_ms(10);
+        _delay_ms(10);
 
-		if (debounce == 4)
-			return 1;
-	}
+        if (debounce == 4)
+            return 1;
+    }
 }
 /**********************************************************************
  * Function: Main function where the program execution begins.
@@ -73,9 +73,9 @@ int main(void)
     // Infinite loop
     while (1)
     {
-		// Pause several milliseconds
-		_delay_ms(BLINK_DELAY);
-				
+        // Pause several milliseconds
+        _delay_ms(BLINK_DELAY);
+                
         if(buttonPushed(&PIND, PUSH))
         {
             PORTB = PORTB ^ (1<<LED_GREEN);

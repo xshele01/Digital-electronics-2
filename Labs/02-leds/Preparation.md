@@ -1,11 +1,11 @@
 # Lab 2: Control of GPIO, LED, push button
 ### Part 1: Preparation tasks
 
-1. Two basic ways to connect a LED to the output pin of the microcontroller: 
+1. Two basic ways to connect the LED to the output pin of the microcontroller: 
    
 ![LED connection options](Images/LED-Schematic.jpg)
 
-2. LED resistor values for typical red and blue LEDs can be calculated according to Ohm's law:
+2. The LED resistor values for typical red and blue LEDs can be calculated according to Ohm's law:
 
 ![Ohm's law](Images/resistor.svg)
 
@@ -20,7 +20,7 @@
 
 ### Part 2: Active-low and active-high LEDs
 
-1. Complete tables according to the AVR manual.
+1. According to the AVR manual:
 
 | **DDRB** | **Description** |
 | :-: | :-- |

@@ -1,11 +1,11 @@
 /***********************************************************************
  * 
- * Alternately toggle two LEDs when a push button is pressed.
+ * LED brightness controller using PWM
  * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2021 Pavlo Shelemba
  * Dept. of Radio Electronics, Brno University of Technology, Czechia
- * This work is licensed under the terms of the MIT license.
+ * This work is licensed under the terms of the MIT license
  * 
  **********************************************************************/
 
@@ -29,14 +29,14 @@ int main(void)
 {
     // Configure green LED at port B
     DDRB = DDRB | (1<<LED_GREEN);
-	// Set LED off
+  // Set LED off
     PORTB = PORTB & ~(1<<LED_GREEN);
 
     while (1)
     {
-		PORTB = PORTB | (1<<LED_GREEN);
-		_delay_us(DUTY50);
-		PORTB = PORTB & ~(1<<LED_GREEN);
-		_delay_us(DUTY50);
+    PORTB = PORTB | (1<<LED_GREEN);
+    _delay_us(DUTY50);
+    PORTB = PORTB & ~(1<<LED_GREEN);
+    _delay_us(DUTY50);
     }
 }

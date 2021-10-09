@@ -28,7 +28,7 @@ https://github.com/xshele01/Digital-electronics-2
 
 ### Morse code
 
-1. Listing of C code, which repeats one "dot" and one "dash" (letter `A`) on a LED:
+1. Listing of the C code, which repeats one "dot" and one "dash" (letter `A`) on a LED:
 
 ```c
 int main(void)

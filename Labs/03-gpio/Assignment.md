@@ -17,11 +17,11 @@ https://github.com/xshele01/Digital-electronics-2
 
 ### GPIO library
 
-1. The difference between the declaration and the definition of the function in C:
+1. Difference between function declaration and definition in C:
    * **Function declaration** tells the compiler about the existence of a function.
    * **Function definition** actually implements a function.
 
-2. Part of the C code, which uses my GPIO library to toggle LEDs when push button is pressed. Otherwise, the values of the LEDs do not change. Push button is connected to port D:
+2. Part of the C code, which uses my GPIO library to toggle LEDs when a push button is pressed. Otherwise, the values of the LEDs do not change. The button is connected to port D:
 
 ```c
     // Configure Push button at port D and enable internal pull-up resistor
