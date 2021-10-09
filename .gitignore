@@ -1,5 +1,7 @@
-#Visual Studio Debug folder
+#Visual Studio
 **/Debug
+.vscode
+.vs
 
 # Prerequisites
 *.d
