@@ -10,14 +10,14 @@
  **********************************************************************/
 
 /* Defines -----------------------------------------------------------*/
-#define LED_GREEN       PB5      // Green LED pin
-#define DUTY0			0 
-#define DUTY25			125
-#define DUTY50			250
-#define DUTY75			375
-#define DUTY100			500
+#define LED_GREEN PB5       // Green LED pin
+#define DUTY0     0         // Duty cycles for PWM
+#define DUTY25    125
+#define DUTY50    250
+#define DUTY75    375
+#define DUTY100   500
 #ifndef F_CPU
-# define F_CPU          16000000 // CPU frequency in Hz for delay
+# define F_CPU    16000000  // CPU frequency in Hz for delay.h
 #endif
 
 /* Includes ----------------------------------------------------------*/

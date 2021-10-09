@@ -9,9 +9,9 @@
  * 
  **********************************************************************/
 
-#define PUSH  PD4
+#define PUSH  PD4           // Push button pin
 #ifndef F_CPU
-#define F_CPU 16000000UL
+#define F_CPU 16000000UL    // CPU frequency in Hz for delay.h
 #endif
 
 #include <avr/io.h>

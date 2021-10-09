@@ -12,12 +12,12 @@
  **********************************************************************/
 
 /* Defines -----------------------------------------------------------*/
-#define LED_GREEN PB5       // Green LED pin
-#define LED_BREAD PC5       // Breadboard LED pin
+#define LED_GREEN   PB5     // Green LED pin
+#define LED_BREAD   PC5     // Breadboard LED pin
 #define PUSH_BTN    PD4     // Push Button pin
 #define BLINK_DELAY 500
 #ifndef F_CPU
-# define F_CPU 16000000     // CPU frequency in Hz required for delay
+# define F_CPU 16000000     // CPU frequency in Hz for delay.h
 #endif
 
 /* Includes ----------------------------------------------------------*/

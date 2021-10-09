@@ -9,20 +9,20 @@
  * 
  **********************************************************************/
 
-#define LED_RED_P   PB3     // Red LED pin for pedestrians
-#define LED_GRN_P   PB2     // Green LED pin for pedestrians
-#define LED_RED_C   PC4     // Red LED pin for cars
-#define LED_YLW_C   PC3     // Yellow LED pin for cars
-#define LED_GRN_C   PC2     // Green LED pin for cars
-#define PUSH_BTN    PD4     // Push Button pin
+#define LED_RED_P   PB3         // Red LED pin for pedestrians
+#define LED_GRN_P   PB2         // Green LED pin for pedestrians
+#define LED_RED_C   PC4         // Red LED pin for cars
+#define LED_YLW_C   PC3         // Yellow LED pin for cars
+#define LED_GRN_C   PC2         // Green LED pin for cars
+#define PUSH_BTN    PD4         // Push Button pin
 #define BLINK_DELAY 500
 #ifndef F_CPU
-# define F_CPU 16000000     // CPU frequency in Hz for delay
+# define F_CPU      16000000    // CPU frequency in Hz for delay.h
 #endif
 
-#include <util/delay.h>     // Functions for busy-wait delay loops
-#include <avr/io.h>         // AVR device-specific IO definitions
-#include "gpio.h"           // GPIO library
+#include <util/delay.h>         // Functions for busy-wait delay loops
+#include <avr/io.h>             // AVR device-specific IO definitions
+#include "gpio.h"               // GPIO library
 
 //Button press detector with debouncing
 uint8_t buttonPushed(volatile uint8_t *reg_name, uint8_t pin_num)
@@ -76,8 +76,8 @@ int main(void)
             GPIO_toggle(&PORTB, LED_RED_P); // Pedestrian Red    LED 1 -> 0
             GPIO_toggle(&PORTB, LED_GRN_P); // Pedestrian Green  LED 0 -> 1
             _delay_ms(BLINK_DELAY * 5);     // Wait on    Red
-            GPIO_toggle(&PORTC, LED_RED_C);	// Car        Red    LED 1 -> 0 
-            GPIO_toggle(&PORTC, LED_YLW_C);	// Car        Yellow LED 0 -> 1
+            GPIO_toggle(&PORTC, LED_RED_C); // Car        Red    LED 1 -> 0 
+            GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 0 -> 1
             _delay_ms(BLINK_DELAY * 3);     // Wait on    Yellow
             GPIO_toggle(&PORTC, LED_YLW_C); // Car        Yellow LED 1 -> 0
             GPIO_toggle(&PORTC, LED_GRN_C); // Car        Green  LED 0 -> 1

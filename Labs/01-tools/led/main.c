@@ -24,7 +24,7 @@
 #define SHORT_DELAY 250 // Delay in milliseconds
 #ifndef F_CPU           // Preprocessor directive allows for conditional
                         // compilation. The #ifndef means "if not defined".
-# define F_CPU 16000000 // CPU frequency in Hz required for delay
+# define F_CPU 16000000 // CPU frequency in Hz for delay.h
 #endif                  // The #ifndef directive must be closed by #endif
 
 /* Includes ----------------------------------------------------------*/
