@@ -1,4 +1,5 @@
 # Lab 2: Control of GPIO, LED, push button
+
 ### Part 1: Preparation tasks
 
 1. Two basic ways to connect the LED to the output pin of the microcontroller: 
