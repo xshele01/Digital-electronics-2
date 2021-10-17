@@ -1,7 +1,6 @@
 /***********************************************************************
  * 
- * Control LEDs using functions from GPIO and Timer libraries. Do not 
- * use delay library any more
+ * Control LEDs using functions from GPIO and Timer libraries
  * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2018-Present Tomas Fryza
@@ -34,26 +33,28 @@
              the internal 8- or 16-bit Timer/Counter
  * Returns:  none
  **********************************************************************/
-
-uint16_t wait = 0;
-
 int main(void)
 {
-    // Configuration of LED(s) at port B
+    // Configuration of LEDs at port B
     GPIO_config_output(&DDRB, LED_D1);
+	// Turn first LED on in Data Register
+	GPIO_write_low(&PORTB, LED_D1);
+	
     GPIO_config_output(&DDRB, LED_D2);
+	GPIO_write_high(&PORTB, LED_D2);
+	
     GPIO_config_output(&DDRB, LED_D3);
-    GPIO_config_output(&DDRB, LED_D4);
-    GPIO_write_high(&PORTB, LED_D1);
-    GPIO_write_high(&PORTB, LED_D2);
-    GPIO_write_high(&PORTB, LED_D3);
+	GPIO_write_high(&PORTB, LED_D3);
+	
+    GPIO_config_output(&DDRB, LED_D4);   
     GPIO_write_high(&PORTB, LED_D4);
     
+	// Configure Push Button at port C and enable internal pull-up resistor
     GPIO_config_input_pullup(&DDRC, BTN_S1);
 
     // Configuration of 16-bit Timer/Counter1 for LED blinking
     // Set the overflow prescaler to 262 ms and enable interrupt
-    TIM1_overflow_262ms();
+    TIM1_overflow_1s();
     TIM1_overflow_interrupt_enable();
 
     // Enables interrupts by setting the global interrupt mask
@@ -62,14 +63,14 @@ int main(void)
     // Infinite loop
     while (1)
     {
-//         if(!GPIO_read(&PINC, BTN_S1))
-//         {
-//             TIM1_overflow_33ms();
-//         }            
-//         else
-//         {
-//             TIM1_overflow_262ms();
-//         }            
+        if(!GPIO_read(&PINC, BTN_S1))
+        {
+            TIM1_overflow_262ms();
+        }            
+        else
+        {
+            TIM1_overflow_1s();
+        }            
     }
     
     // Will never reach this
@@ -79,49 +80,43 @@ int main(void)
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
- * Purpose:  Toggle D1 LED on Multi-function shield
+ * Purpose:  Toggle LEDs on Multi-function shield Knight Rider style
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
-    static uint16_t i = 1;
-    if (i == 1)
-    {
-        GPIO_toggle(&PORTB, LED_D1);
-        ++i;
-    }        
-    else if (i == 2)
-    {
-        GPIO_toggle(&PORTB, LED_D1);
-        GPIO_toggle(&PORTB, LED_D2);
-        ++i;
-    }
-    else if (i == 3)
-    {
-        GPIO_toggle(&PORTB, LED_D2);
-        GPIO_toggle(&PORTB, LED_D3);
-        ++i;
-    }
-    else if (i == 4)
-    {
-        GPIO_toggle(&PORTB, LED_D3);
-        GPIO_toggle(&PORTB, LED_D4);
-        ++i;
-    }
-    else if (i == 5)
-    {
-        GPIO_toggle(&PORTB, LED_D4);
-        GPIO_toggle(&PORTB, LED_D3);
-        ++i;
-    }
-    else if (i == 6)
-    {
-        GPIO_toggle(&PORTB, LED_D3);
-        GPIO_toggle(&PORTB, LED_D2);
-        ++i;
-    }
-    else if (i == 7)
-    {
-        GPIO_toggle(&PORTB, LED_D2);
-        i = 1;
-    }
+	static uint16_t i = 0;
+	
+	switch(i)
+	{
+		case 0:
+			GPIO_toggle(&PORTB, LED_D1);
+			GPIO_toggle(&PORTB, LED_D2);
+			++i;
+			break;
+		case 1:
+			GPIO_toggle(&PORTB, LED_D2);
+			GPIO_toggle(&PORTB, LED_D3);
+			++i;
+			break;
+		case 2:
+			GPIO_toggle(&PORTB, LED_D3);
+			GPIO_toggle(&PORTB, LED_D4);
+			++i;
+			break;
+		case 3:
+			GPIO_toggle(&PORTB, LED_D4);
+			GPIO_toggle(&PORTB, LED_D3);
+			++i;
+			break;
+		case 4:
+			GPIO_toggle(&PORTB, LED_D3);
+			GPIO_toggle(&PORTB, LED_D2);
+			++i;
+			break;
+		case 5:
+			GPIO_toggle(&PORTB, LED_D2);
+			GPIO_toggle(&PORTB, LED_D1);
+			i = 0;
+			break;
+	}
 }   

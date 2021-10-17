@@ -3,7 +3,7 @@
 
 /***********************************************************************
  * 
- * Timer library for AVR-GCC.
+ * Timer library for AVR-GCC
  * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2019-Present Tomas Fryza

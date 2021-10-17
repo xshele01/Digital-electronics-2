@@ -13,3 +13,8 @@ Welcome to my DE-2 repository!
 
 * [Digital Electronics 2 course](https://github.com/tomas-fryza/Digital-electronics-2)
 * [Digital Electronics 1 Wiki](https://github.com/tomas-fryza/Digital-electronics-1/wiki)
+
+### Useful links
+
+* [Embedded Systems tutorials](https://www.tutorialspoint.com/embedded_systems/index.htm)
+* [Diagramming application](https://app.diagrams.net)

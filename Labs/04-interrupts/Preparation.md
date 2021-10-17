@@ -2,7 +2,7 @@
 
 ### Part 1: Preparation tasks
 
-1. Overflow times for three Timer/Counter modules that contain ATmega328P if CPU clock frequency is 16 MHz:
+1. Overflow times in seconds for three Timer/Counter modules that contain ATmega328P if CPU clock frequency is 16 MHz:
 
 | **Module** | **Number of bits** | **1** | **8** | **32** | **64** | **128** | **256** | **1024** |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -58,3 +58,16 @@ Selected interrupt sources in ATmega328:
 | 0x0024 | USART_RX | `USART_RX_vect` | USART Rx Complete |
 | 0x002A | ADC | `ADC_vect` | ADC Conversion Complete |
 | 0x0030 | TWI | `TWI_vect` | 2-wire Serial Interface |
+
+### Part 5: PWM (Pulse Width Modulation)
+
+Arduino Uno pins that can be used to generate the PWM signal by internal timer modules:
+
+| **Module** | **Description** | **MCU pin** | **Arduino pin** |
+| :-: | :-: | :-: | :-: |
+| Timer/Counter0 | OC0A | PD6 | 6 |
+|                | OC0B | PD5 | 5 |
+| Timer/Counter1 | OC1A | PB1 | 9 |
+|                | OC1B | PB2 | 10 |
+| Timer/Counter2 | OC2A | PB3 | 11 |
+|                | OC2B | PD3 | 3 |
