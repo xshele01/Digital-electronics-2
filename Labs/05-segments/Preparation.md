@@ -19,6 +19,6 @@
    | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
    | 9 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1 |
 
-3. According to the scematic of [Multi-function shield](../../Docs/arduino_shield.pdf), seven-segment display has an active low connection. 
+3. According to the scematic of [Multi-function shield](../../Docs/arduino_shield.pdf), seven-segment display has a common anode (active LOW) connection. 
 
     Two 74HC595 shift registers allow a gradual (serial) insertion of individual bits into the shift register by means of a clock signal. With each CLK period, one bit is "pushed"; 8 periods are required to display one symbol.
