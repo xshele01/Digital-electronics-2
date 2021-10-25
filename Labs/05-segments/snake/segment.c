@@ -19,30 +19,15 @@
 #include "segment.h"
 
 /* Variables ---------------------------------------------------------*/
-// Active-low digit 0 to 9
+// Active-low
 uint8_t segment_value[] = {
-	// a b c d e f g DP
-	0b00000011,     // Digit 0
-	0b10011111,     // Digit 1
-	0b00100101,     // Digit 2
-	0b00001101,     // Digit 3
-	0b10011001,     // Digit 4
-	0b01001001,     // Digit 5
-	0b01000001,     // Digit 6
-	0b00011111,     // Digit 7
-	0b00000001,     // Digit 8
-	0b00011001,     // Digit 9
-	
-	0b00000010,     // Digit 0.
-	0b10011110,     // Digit 1.
-	0b00100100,     // Digit 2.
-	0b00001100,     // Digit 3.
-	0b10011000,     // Digit 4.
-	0b01001000,     // Digit 5.
-	0b01000000,     // Digit 6.
-	0b00011110,     // Digit 7.
-	0b00000000,     // Digit 8.
-	0b00011000      // Digit 9.
+	// snake segments
+	0b01111111,
+	0b10111111,
+	0b11011111,
+	0b11101111,
+	0b11110111,
+	0b11111011,
 };
 
 // Active-high position 0 to 3
@@ -178,8 +163,7 @@ void SEG_clk_2us()
 {
 	// Wait 1 us
 	_delay_us(1);
-	
-	// Pull CLK high	
+		
 	GPIO_write_high(&PORTD, SEG_CLK);
 		    
 	// Wait 1 us

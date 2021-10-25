@@ -1,3 +1,7 @@
+# Lab 5: Display devices, 7-segment display
+
+### Preparation tasks
+
 1. According to [7-segment display tutorial](https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html), the displays common pin is generally used to identify the type of 7-segment display:
    * Common Cathode 7-segment display (CC SSD) has all the cathodes of the 7-segments connected directly together to logic LOW or ground. The individual segments are illuminated by application of a HIGH signal via a current limiting resistor to forward bias the individual Anode terminals.
   ![Common Cathode 7-segment display](Images/cc_ssd.gif)
@@ -19,6 +23,5 @@
    | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
    | 9 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1 |
 
-3. According to the scematic of [Multi-function shield](../../Docs/arduino_shield.pdf), seven-segment display has a common anode (active LOW) connection. 
-
-    Two 74HC595 shift registers allow a gradual (serial) insertion of individual bits into the shift register by means of a clock signal. With each CLK period, one bit is "pushed"; 8 periods are required to display one symbol.
+3. According to the scematic of [Multi-function shield](../../Docs/arduino_shield.pdf), seven-segment display has a common anode (active LOW) connection.
+Two 74HC595 shift registers allow a gradual (serial) insertion of individual bits into the shift register by means of a clock signal. With each CLK period, one bit is "pushed"; 8 periods are required to display one symbol.

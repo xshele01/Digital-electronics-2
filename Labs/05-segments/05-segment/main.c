@@ -6,7 +6,7 @@
  * Copyright (c) 2018-Present Tomas Fryza
  * Copyright (c) 2021 Pavlo Shelemba
  * Dept. of Radio Electronics, Brno University of Technology, Czechia
- * This work is licensed under the terms of the MIT license.
+ * This work is licensed under the terms of the MIT license
  * 
  **********************************************************************/
 
@@ -63,18 +63,17 @@ uint8_t count_3 = 0;
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
- * Purpose:  Increment decimal counter value and display it on SSD.
- **********************************************************************/ 
+ * Purpose:  Increment counter value from 00 to 59
+ **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
     ++count_0;
     
     if (count_0 == 10)
-    {
+	{
         count_0 = 0;
-  
         ++count_1;
-        
+       
         if (count_1 == 6)
         {
             count_0 = 0;
@@ -98,6 +97,10 @@ ISR(TIMER1_OVF_vect)
     }
 }
 
+/**********************************************************************
+ * Function: Timer/Counter0 overflow interrupt
+ * Purpose:  Display tens and units of a counter at SSD
+ **********************************************************************/
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t pos = 0;
