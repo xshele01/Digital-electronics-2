@@ -15,6 +15,10 @@
 #include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
 #include "timer.h"          // Timer library for AVR-GCC
 #include "segment.h"        // Seven-segment display library for AVR-GCC
+#include "gpio.h"           // GPIO library for AVR-GCC
+
+/* Defines -----------------------------------------------------------*/
+#define BTN_S1  PC1         // Push Button pin 
 
 /* Function definitions ----------------------------------------------*/
 /**********************************************************************
@@ -28,18 +32,23 @@ int main(void)
     // Configure SSD signals
     SEG_init();
 
-    // Test of SSD: display number '3' at position 0
-/*    SEG_update_shift_regs(3, 0);*/
-
     // Configure 16-bit Timer/Counter1 for Decimal counter
     TIM1_overflow_262ms();
-    
-    TIM0_overflow_4ms();
-    
     // Set the overflow prescaler to 262 ms and enable interrupt
     TIM1_overflow_interrupt_enable();
-
+	
+	// Configure 8-bit Timer/Counter0 for Decimal counter
+	TIM0_overflow_4ms();
+	// Set the overflow prescaler to 4 ms and enable interrupt
     TIM0_overflow_interrupt_enable();
+
+	// Enable pin change interrupt for the Push Button I/O pins
+	PCICR |= (1<<PCIE1);
+	// Enable pin change interrupt on the Push Button I/O pin
+	PCMSK1 |= (1<<PCINT9);
+	
+	// Configure Push Button at port C and enable internal pull-up resistor
+    GPIO_config_input_pullup(&DDRC, BTN_S1);
 
     // Enables interrupts by setting the global interrupt mask
     sei();
@@ -55,12 +64,13 @@ int main(void)
     return 0;
 }
 
+/* Interrupt service routines ----------------------------------------*/
+// Counter values
 uint8_t count_0 = 0;
 uint8_t count_1 = 0;
 uint8_t count_2 = 0;
 uint8_t count_3 = 0;
 
-/* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
  * Purpose:  Increment counter value from 00 to 59
@@ -99,7 +109,7 @@ ISR(TIMER1_OVF_vect)
 
 /**********************************************************************
  * Function: Timer/Counter0 overflow interrupt
- * Purpose:  Display tens and units of a counter at SSD
+ * Purpose:  Display counter value on SSD
  **********************************************************************/
 ISR(TIMER0_OVF_vect)
 {
@@ -123,3 +133,14 @@ ISR(TIMER0_OVF_vect)
     }
 }
 
+/**********************************************************************
+ * Function: Pin Change Interrupt
+ * Purpose:  Reset counter values
+ **********************************************************************/
+ISR(PCINT1_vect)
+{
+	count_0 = 0;
+	count_1 = 0;
+	count_2 = 0;
+	count_3 = 0;
+}

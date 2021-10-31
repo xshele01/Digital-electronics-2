@@ -25,3 +25,18 @@
 
 3. According to the scematic of [Multi-function shield](../../Docs/arduino_shield.pdf), seven-segment display has a common anode (active LOW) connection.
 Two 74HC595 shift registers allow a gradual (serial) insertion of individual bits into the shift register by means of a clock signal. With each CLK period, one bit is "pushed"; 8 periods are required to display one symbol.
+
+### Experiments
+
+ I/O registers and bits that configure the Pin Change Interrupts:
+
+ | **Interrupt** | **Vector name** | **Pins** | **Operation** | **I/O register** | **Bit(s)** |
+| :-: | :-: | :-: | :-- | :-: | :-: |
+| Pin Change Interrupt 0 | `PCINT0_vect` | PB[7:0] | Interrupt enable<br>Select pins | PCICR<br>PCMSK0 | PCIE0<br>PCINT[7:0] |
+| Pin Change Interrupt 1 | `PCINT1_vect`| PC[6:0] | Interrupt enable<br>Select pins | PCICR<br>PCMSK1 | PCIE1<br>PCINT[14:8] |
+| Pin Change Interrupt 2 | `PCINT2_vect`| PD[7:0] | Interrupt enable<br>Select pins | PCICR<br>PCMSK2 | PCIE2<br>PCINT[23:16] |
+
+**PCICR** – Pin Change Interrupt Control Register
+**PCIE** – Pin Change Interrupt Enable
+**PCMSK** – Pin Change Mask Register
+**PCINT** – Pin Change Enable Mask

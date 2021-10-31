@@ -69,10 +69,16 @@ void SEG_init(void);
 void SEG_update_shift_regs(uint8_t segments, uint8_t position);
 
 
-/* SEG_clear */
+/**
+ * @brief  Ensure that entire SSD goes out.
+ * @return none
+ */
 void SEG_clear();
 
-/* SEG_clk_2us */
+/**
+ * @brief  Generate 1 period of a clock signal with a period of 2 us.
+ * @return none
+ */
 void SEG_clk_2us();
 
 /** @} */
