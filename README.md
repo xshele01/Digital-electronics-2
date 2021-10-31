@@ -9,6 +9,7 @@ Welcome to my DE-2 repository!
 3. [User library for GPIO control](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/03-gpio)
 4. [Interrupts, timers](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/04-interrupts)
 5. [Display devices, 7-segment display](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/05-segment)
+6. [Display devices, LCD display](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/06-lcd)
 
 ## Course links
 
@@ -17,5 +18,8 @@ Welcome to my DE-2 repository!
 
 ### Useful links
 
-* [Embedded Systems tutorials](https://www.tutorialspoint.com/embedded_systems/index.htm)
-* [Diagramming application](https://app.diagrams.net)
+* [Embedded Systems Tutorials](https://www.tutorialspoint.com/embedded_systems/index.htm)
+* [Diagramming Application](https://app.diagrams.net)
+* [LCD Screenshot Generator](https://avtanski.net/projects/lcd/)
+* [16×2 LCD Module Tutorial](https://lastminuteengineers.com/arduino-1602-character-lcd-tutorial/)
+* [Custom Character Generator](https://omerk.github.io/lcdchargen/)

@@ -65,11 +65,6 @@ int main(void)
 	// Set the overflow prescaler to 4 ms and enable interrupt
 	TIM0_overflow_interrupt_enable();
 	
-	// Configure 16-bit Timer/Counter0 for Decimal counter
-	TIM1_overflow_33ms();
-	// Set the overflow prescaler to 4 ms and enable interrupt
-	TIM1_overflow_interrupt_enable();
-	
 	// Configure 8-bit Timer/Counter0 for Decimal counter
 	TIM2_overflow_4ms();
 	// Set the overflow prescaler to 4 ms and enable interrupt
@@ -116,10 +111,6 @@ ISR(TIMER0_OVF_vect)
             pos = 0;
             break;
     }
-}
-
-ISR(TIMER1_OVF_vect)
-{
 }
 
 ISR(TIMER2_OVF_vect)

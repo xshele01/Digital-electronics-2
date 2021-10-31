@@ -1,5 +1,5 @@
 #ifndef TWI_H
-#define TWI_H
+# define TWI_H
 
 /***********************************************************************
  * 
@@ -37,8 +37,10 @@
  * @{
  */
 
+
 /* Includes ----------------------------------------------------------*/
  #include <avr/io.h>
+
 
 /* Defines -----------------------------------------------------------*/
 /**
@@ -71,10 +73,6 @@
 
 
 /* Function prototypes -----------------------------------------------*/
-/**
- * @name Functions
- */
-
 /**
  * @brief  Initialize TWI, enable internal pull-ups, set SCL frequency.
  * @par    Implementation notes:
