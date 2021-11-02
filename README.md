@@ -20,6 +20,8 @@ Welcome to my DE-2 repository!
 
 * [Embedded Systems Tutorials](https://www.tutorialspoint.com/embedded_systems/index.htm)
 * [Diagramming Application](https://app.diagrams.net)
-* [LCD Screenshot Generator](https://avtanski.net/projects/lcd/)
 * [16×2 LCD Module Tutorial](https://lastminuteengineers.com/arduino-1602-character-lcd-tutorial/)
+* [LCD Screenshot Generator](https://avtanski.net/projects/lcd/)
 * [Custom Character Generator](https://omerk.github.io/lcdchargen/)
+* [WaveDrom Editor](https://wavedrom.com/editor.html)
+* [Circuit Diagram Editor](https://www.circuit-diagram.org/)
