@@ -10,6 +10,7 @@ Welcome to my DE-2 repository!
 4. [Interrupts, timers](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/04-interrupts)
 5. [Display devices, 7-segment display](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/05-segment)
 6. [Display devices, LCD display](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/06-lcd)
+7. [Lab 7: ADC and UART serial communication](https://github.com/tomas-fryza/Digital-electronics-2/tree/master/Labs/07-uart)
 
 ## Course links
 
@@ -25,3 +26,4 @@ Welcome to my DE-2 repository!
 * [Custom Character Generator](https://omerk.github.io/lcdchargen/)
 * [WaveDrom Editor](https://wavedrom.com/editor.html)
 * [Circuit Diagram Editor](https://www.circuit-diagram.org/)
+* [LaTeX Equation Editor](https://www.latex4technics.com/)
