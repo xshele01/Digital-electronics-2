@@ -59,6 +59,6 @@ A kitchen alarm with an LCD, one LED and three push buttons: start, +1 minute, -
 The countdown value is shown on the display in the form of mm.ss (minutes.seconds). 
 At the end of the countdown, the LED will start blinking.
 
-1. Schematic of kitchen alarm:
+1. Schematic of the kitchen alarm:
 
-![Schematic of kitchen alarm](Images/circuit.svg)
+![Schematic of the kitchen alarm](Images/circuit.svg)

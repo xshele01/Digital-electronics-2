@@ -104,6 +104,7 @@ ISR(ADC_vect)
 
     value = ADC;                  // Copy ADC result to 16-bit variable
     itoa(value, lcd_string, 10);  // Convert decimal value to string
+    
     uart_puts(lcd_string);
     uart_puts("\n\r");
 
