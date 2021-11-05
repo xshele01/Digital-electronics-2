@@ -71,3 +71,12 @@ Arduino Uno pins that can be used to generate the PWM signal by internal timer m
 |                | OC1B | PB2 | 10 |
 | Timer/Counter2 | OC2A | PB3 | 11 |
 |                | OC2B | PD3 | 3 |
+
+### Experiments on your own
+
+According to the [ATmega328P datasheet](../../Docs/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf), the main differences between:
+
+*  In **normal mode** the counting direction is always up (incrementing), and no counter clear is performed. Counter overflows back to the start. 
+*  In **Clear Timer on Compare** or **CTC mode** alows to manipulate the counter resolution.
+*  The **fast Pulse Width Modulation** or **fast PWM mode** provides a high frequency PWM waveform generation option. It is based on a single-slope operation.
+*  The **phase correct PWM mode** provides a high resolution phase correct PWM waveform generation option. It is based on a dual-slope operation.
