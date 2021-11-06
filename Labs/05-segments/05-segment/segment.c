@@ -96,7 +96,7 @@ void SEG_update_shift_regs(uint8_t segments, uint8_t position)
     for (bit_number = 0; bit_number < 8; ++bit_number)
     {
         // Test LSB of "segments" by & (faster) or % (slower) and...
-        if (!(segments & 00000001))
+        if (!(segments & 0b00000001))
         // ...output DATA value
             GPIO_write_low(&PORTB, SEG_DATA);
         else
@@ -114,7 +114,7 @@ void SEG_update_shift_regs(uint8_t segments, uint8_t position)
     for (bit_number = 0; bit_number < 8; ++bit_number)
     {
         // Test LSB of "position" by & (faster) or % (slower) and...
-        if (position & 00000001)
+        if (position & 0b00000001)
         // ...output DATA value
             GPIO_write_high(&PORTB, SEG_DATA);
         else
