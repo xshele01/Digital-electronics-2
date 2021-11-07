@@ -76,7 +76,7 @@ ISR(ADC_vect)
 
 ### UART communication
 
-1. (Hand-drawn) picture of UART signal when transmitting three character data `De2` in 4800 7O2 mode (7 data bits, odd parity, 2 stop bits, 4800&nbsp;Bd):
+1. Picture of UART signal when transmitting three character data `De2` in 4800 7O2 mode (7 data bits, odd parity, 2 stop bits, 4800&nbsp;Bd):
 
 ![Picture of UART signal](Images/wavedrom.svg)
 
@@ -86,9 +86,9 @@ ISR(ADC_vect)
 
 ### Temperature meter
 
-An application for temperature measurement and display using temperature sensor [TC1046](http://ww1.microchip.com/downloads/en/DeviceDoc/21496C.pdf), LCD, one LED and a push button. 
+An application for temperature measurement and display using temperature sensor [TC1046](../../Docs/21496C.pdf), LCD, one LED and a push button. 
 After pressing the button, the temperature is measured, its value is displayed on the LCD and data is sent to the UART. When the temperature is too high, the LED will start blinking.
 
 1. Schematic of the temperature meter:
 
-![Schematic of the temperature meter]()
+![Schematic of the temperature meter](Images/circuit.svg)
