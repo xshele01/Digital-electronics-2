@@ -17,7 +17,7 @@ https://github.com/xshele01/Digital-electronics-2
    | Select | 3.182&nbsp;V | 651 | 639 |
    | none   | 5&nbsp;V | 1023 | 1023 |
 
-2. Code listing of ACD interrupt service routine for sending data to the LCD/UART and identification of the pressed button. Always use syntax highlighting and meaningful comments:
+2. Code listing of ACD interrupt service routine for sending data to the LCD/UART and identification of the pressed button:
 
 ```c
 /**********************************************************************

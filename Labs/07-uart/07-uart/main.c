@@ -18,6 +18,7 @@
 #include "lcd.h"            // Peter Fleury's LCD library
 #include <stdlib.h>         // C library. Needed for conversion function
 #include "uart.h"           // Peter Fleury's UART library
+#include <math.h>
 
 /* Defines -----------------------------------------------------------*/
 #ifndef F_CPU
@@ -25,7 +26,37 @@
                          // UART_BAUD_SELECT
 #endif
 
+/* Variables ---------------------------------------------------------*/
+enum Parity
+{
+    Odd,
+    Even    
+};
+
 /* Function definitions ----------------------------------------------*/
+/**********************************************************************
+ * Function: Parity bit generator
+ * Purpose:  Use input 8-bit data and provided parity type to calculate
+ *           a parity bit
+ * Returns:  Parity byte
+ **********************************************************************/
+uint8_t get_parity(uint16_t data, uint8_t type)
+{
+    uint8_t parity = type ? 0 : 1;
+    
+    for (int8_t i = 0; i < sizeof(data)*8; ++i)
+    {
+        if (data & 1)
+        {
+            parity = !parity;
+        }
+        
+        data = data >> 1;
+    }
+    
+    return parity;
+}
+
 /**********************************************************************
  * Function: Main function where the program execution begins
  * Purpose:  Use Timer/Counter1 and start ADC conversion four times 
@@ -38,9 +69,8 @@ int main(void)
     lcd_init(LCD_DISP_ON);
     lcd_gotoxy(1, 0); lcd_puts("value:");
     lcd_gotoxy(3, 1); lcd_puts("key:");
-    lcd_gotoxy(8, 0); lcd_puts("a");    // Put ADC value in decimal
-    lcd_gotoxy(13,0); lcd_puts("b");    // Put ADC value in hexadecimal
-    lcd_gotoxy(8, 1); lcd_puts("c");    // Put button name here
+    lcd_gotoxy(8, 0); lcd_puts("0    mV");    // Put ADC value in decimal
+    lcd_gotoxy(8, 1); lcd_puts("none");    // Put button name here
 
     // Configure ADC to convert PC0[A0] analog value
     // Set ADC reference to AVcc
@@ -99,22 +129,20 @@ ISR(TIMER1_OVF_vect)
  **********************************************************************/
 ISR(ADC_vect)
 {
-    uint16_t value = 0;
-    char lcd_string[4] = "0000";
+    uint16_t mV = 0;
+    uint32_t value = 0;
+    char lcd_string[8] = "0000";
 
-    value = ADC;                  // Copy ADC result to 16-bit variable
-    itoa(value, lcd_string, 10);  // Convert decimal value to string
+    value = ADC;                    // Copy ADC result to 32-bit variable
+    mV = round((value*5000)/1023);  // Convert ADC value to mV
+
+    itoa(mV, lcd_string, 10);       // Convert mV value to string
     
     uart_puts(lcd_string);
     uart_puts("\n\r");
 
     lcd_gotoxy(8, 0); lcd_puts("    ");
-    lcd_gotoxy(8, 0); lcd_puts(lcd_string);    // Put ADC value in decimal
-    
-    itoa(value, lcd_string, 16);  // Convert decimal value to string
-    
-    lcd_gotoxy(13,0); lcd_puts("    ");
-    lcd_gotoxy(13,0); lcd_puts(lcd_string);    // Put ADC value in hexadecimal
+    lcd_gotoxy(8, 0); lcd_puts(lcd_string);    // Put mV value in decimal
     
     lcd_gotoxy(8, 1); lcd_puts("      ");
     lcd_gotoxy(8, 1); 
@@ -122,25 +150,40 @@ ISR(ADC_vect)
     if (value > 1000)
     {
         lcd_puts("none");
+        uart_puts("none");
     }
     else if (value > 600)
     {
         lcd_puts("select");
+        uart_puts("select");
     }
     else if (value > 300)
     {
         lcd_puts("left");
+        uart_puts("left");
     }
     else if (value > 200)
     {
         lcd_puts("down");
+        uart_puts("down");
     }
     else if (value > 90)
     {
         lcd_puts("up");
+        uart_puts("up");
     }
     else if (value >= 0)
     {
         lcd_puts("right");
+        uart_puts("right");
     }
+    
+    uart_puts("\n\r");
+    
+    itoa(get_parity(value, Odd), lcd_string, 10);
+    
+    lcd_gotoxy(14, 1); lcd_puts(" ");
+    lcd_gotoxy(14, 1); lcd_puts(lcd_string);
+    uart_puts(lcd_string);
+    uart_puts("\n\r");
 }
