@@ -1,0 +1,14 @@
+{
+  signal: [
+  {name: 'Signal',
+   wave: 'hl.hlh..l.......hl...hl.hlh..l.hlh..l....h.',
+   node: 'IJ'},
+  {name: 'Clock',
+   wave: 'h.lP.......pP.......ph.lP.......pP.......ph',
+   node: 'IJ'},
+  {},
+  {name: 'Type',
+   wave: 'x2.2......222.......222.2......222.......22',
+   data: ['start','slave address: 0x5c','write','ack','data to slave: 0x04 (checksum register)','ack','stop','start','slave address: 0x5c','read','ACK','data from slave: 0x04 (sensor checksum)','nack', 'stop']},
+  ],
+}
