@@ -1,13 +1,13 @@
 {signal: [
   {name: 'Signal',
-   wave: 'hl.hl..hlh..lhlhl.h....l.hl.h.l.h.',
+   wave: 'hl..hl..hlh..lhlhl.h.lh..l.hl.h.l..h.',
    node: 'IJ'},
   {},
   {name: 'Type',
-   wave: 'x22......22222......22222......222',
+   wave: 'x22.......22222.......22222.......222',
    data: ['start','data','parity', 'stop','stop','start','data','parity','stop','stop','start','data','parity','stop','stop']},
   {name: 'Symbol',
-   wave: 'xx4......xxxx7......xxxx5......xxx',
+   wave: 'xx4.......xxxx7.......xxxx5.......xxx',
    data: ['D', 'e', '2']},
 ],
   edge: ['I+J 208 us']
