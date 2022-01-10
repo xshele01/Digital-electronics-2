@@ -127,22 +127,19 @@ int main(void)
 	
 	lcd_gotoxy(11, 0);
     lcd_putc('0');
-
-    // Configure 8-bit Timer/Counter2 for Stopwatch
-    // Set the overflow prescaler to 16 ms and enable interrupt
-    TIM2_overflow_16ms();
-    TIM2_overflow_interrupt_enable();
     
-    // Configure 8-bit Timer/Counter0 for Stopwatch
-    // Set the overflow prescaler to 16 ms and enable interrupt
+    // Configure 8-bit Timer/Counter0 for loading animation
     TIM0_overflow_16ms();
     TIM0_overflow_interrupt_enable();
     
-    // Configure 16-bit Timer/Counter1 for Stopwatch
-    // Set the overflow prescaler to 262 ms and enable interrupt
+    // Configure 16-bit Timer/Counter1 for moving text
     TIM1_overflow_262ms();
     TIM1_overflow_interrupt_enable();
 
+    // Configure 8-bit Timer/Counter2 for Stopwatch
+    TIM2_overflow_16ms();
+    TIM2_overflow_interrupt_enable();
+    
     // Enables interrupts by setting the global interrupt mask
     sei();
 
@@ -158,6 +155,59 @@ int main(void)
 }
 
 /* Interrupt service routines ----------------------------------------*/
+
+ISR(TIMER0_OVF_vect)
+{
+    static uint8_t number_of_overflows = 0;
+    static uint8_t lcd_section = 1;
+    
+    if (number_of_overflows >= 6)
+    {
+        number_of_overflows = 0;
+        ++lcd_section;
+    }
+    
+    if (lcd_section == 11)
+    {
+        lcd_section = 1;
+        
+        lcd_gotoxy(1, 1);
+        lcd_puts("          ");
+    }
+    
+    lcd_gotoxy(lcd_section, 1);
+    lcd_putc(number_of_overflows);
+    
+    ++number_of_overflows;
+}    
+
+ISR(TIMER1_OVF_vect)
+{
+    static char *running_text = "    I like Digital electronics!    \0";
+    static char lcd_text[5];
+    static uint8_t count = 1;
+    static uint8_t pointer = 0;
+    
+    if (count)
+    {
+        memcpy(lcd_text, &running_text[pointer], 4);
+        lcd_text[4] = '\0';
+        count = 0;
+        ++pointer;
+    }
+    else
+    {
+        count = 1;
+    }
+    
+    if (pointer == strlen(running_text) - 4)
+    {
+        pointer = 0;
+    }
+    
+    lcd_gotoxy(11, 1);
+    lcd_puts(lcd_text);
+}
 /**********************************************************************
  * Function: Timer/Counter2 overflow interrupt
  * Purpose:  Update the stopwatch on LCD display every sixth overflow,
@@ -167,8 +217,8 @@ ISR(TIMER2_OVF_vect)
 {
     static uint8_t number_of_overflows = 0;
     static uint8_t tens = 0;        // Tenths of a second
-    static uint8_t secs = 0;       // Seconds
-    static uint8_t mins = 0;       // Minutes
+    static uint8_t secs = 0;        // Seconds
+    static uint8_t mins = 0;        // Minutes
     static uint16_t secs_2 = 0;     // Square seconds
     char lcd_str[2] = "  ";         // Strings for converting numbers by itoa()
     char lcd_2_str[4] = "    ";
@@ -233,57 +283,4 @@ ISR(TIMER2_OVF_vect)
         itoa(secs_2, lcd_2_str, 10);
         lcd_puts(lcd_2_str);
     }
-}
-
-ISR(TIMER0_OVF_vect)
-{
-    static uint8_t number_of_overflows = 0;
-    static uint8_t lcd_section = 1;
-    
-    if (number_of_overflows >= 6)
-    {
-        number_of_overflows = 0;
-        ++lcd_section;
-    }
-    
-    if (lcd_section == 11)
-    {
-        lcd_section = 1;
-        
-        lcd_gotoxy(1, 1);
-        lcd_puts("          ");
-    }
-    
-    lcd_gotoxy(lcd_section, 1);
-    lcd_putc(number_of_overflows);
-    
-    ++number_of_overflows;
-}    
-
-ISR(TIMER1_OVF_vect)
-{
-    static char *running_text = "    I like Digital electronics!    \0";
-    static char lcd_text[5];
-    static uint8_t count = 1;
-    static uint8_t pointer = 0;
-    
-    if (count)
-    {
-        memcpy(lcd_text, &running_text[pointer], 4);
-        lcd_text[4] = '\0';
-        count = 0;
-        ++pointer;
-    }
-    else
-    {
-        count = 1;
-    }
-    
-    if (pointer == strlen(running_text) - 4)
-    {
-        pointer = 0;
-    }
-    
-    lcd_gotoxy(11, 1);
-    lcd_puts(lcd_text);
 }
