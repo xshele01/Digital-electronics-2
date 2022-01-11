@@ -37,24 +37,24 @@ int main(void)
 {
     // Configuration of LEDs at port B
     GPIO_config_output(&DDRB, LED_D1);
-	// Turn first LED on in Data Register
-	GPIO_write_low(&PORTB, LED_D1);
-	
+    // Turn first LED on in Data Register
+    GPIO_write_low(&PORTB, LED_D1);
+    
     GPIO_config_output(&DDRB, LED_D2);
-	GPIO_write_high(&PORTB, LED_D2);
-	
+    GPIO_write_high(&PORTB, LED_D2);
+    
     GPIO_config_output(&DDRB, LED_D3);
-	GPIO_write_high(&PORTB, LED_D3);
-	
+    GPIO_write_high(&PORTB, LED_D3);
+    
     GPIO_config_output(&DDRB, LED_D4);   
     GPIO_write_high(&PORTB, LED_D4);
     
-	// Configure Push Button at port C and enable internal pull-up resistor
+    // Configure Push Button at port C and enable internal pull-up resistor
     GPIO_config_input_pullup(&DDRC, BTN_S1);
 
     // Configuration of 16-bit Timer/Counter1 for LED blinking
     // Set the overflow prescaler to 262 ms and enable interrupt
-    TIM1_overflow_1s();
+    TIM1_overflow_262ms();
     TIM1_overflow_interrupt_enable();
 
     // Enables interrupts by setting the global interrupt mask
@@ -62,16 +62,10 @@ int main(void)
 
     // Infinite loop
     while (1)
-    {
         if(!GPIO_read(&PINC, BTN_S1))
-        {
-            TIM1_overflow_262ms();
-        }            
+            TIM1_overflow_262ms();         
         else
-        {
             TIM1_overflow_1s();
-        }            
-    }
     
     // Will never reach this
     return 0;
@@ -84,39 +78,41 @@ int main(void)
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
-	static uint16_t i = 0;
-	
-	switch(i)
-	{
-		case 0:
-			GPIO_toggle(&PORTB, LED_D1);
-			GPIO_toggle(&PORTB, LED_D2);
-			++i;
-			break;
-		case 1:
-			GPIO_toggle(&PORTB, LED_D2);
-			GPIO_toggle(&PORTB, LED_D3);
-			++i;
-			break;
-		case 2:
-			GPIO_toggle(&PORTB, LED_D3);
-			GPIO_toggle(&PORTB, LED_D4);
-			++i;
-			break;
-		case 3:
-			GPIO_toggle(&PORTB, LED_D4);
-			GPIO_toggle(&PORTB, LED_D3);
-			++i;
-			break;
-		case 4:
-			GPIO_toggle(&PORTB, LED_D3);
-			GPIO_toggle(&PORTB, LED_D2);
-			++i;
-			break;
-		case 5:
-			GPIO_toggle(&PORTB, LED_D2);
-			GPIO_toggle(&PORTB, LED_D1);
-			i = 0;
-			break;
-	}
+    static uint16_t i = 0;
+    
+    switch(i)
+    {
+        case 0:
+            GPIO_toggle(&PORTB, LED_D1);
+            GPIO_toggle(&PORTB, LED_D2);
+            ++i;
+            break;
+        case 1:
+            GPIO_toggle(&PORTB, LED_D2);
+            GPIO_toggle(&PORTB, LED_D3);
+            ++i;
+            break;
+        case 2:
+            GPIO_toggle(&PORTB, LED_D3);
+            GPIO_toggle(&PORTB, LED_D4);
+            ++i;
+            break;
+        case 3:
+            GPIO_toggle(&PORTB, LED_D4);
+            GPIO_toggle(&PORTB, LED_D3);
+            ++i;
+            break;
+        case 4:
+            GPIO_toggle(&PORTB, LED_D3);
+            GPIO_toggle(&PORTB, LED_D2);
+            ++i;
+            break;
+        case 5:
+            GPIO_toggle(&PORTB, LED_D2);
+            GPIO_toggle(&PORTB, LED_D1);
+            i = 0;
+            break;
+        default:
+            break;
+    }
 }   

@@ -4,24 +4,24 @@
 
 1. According to the schematic of the [LCD keypad shield](../../Docs/arduino_shield.pdf):
 
-    ![LCD keypad shield pinout](Images/lcd_pinout.png)
+   ![LCD keypad shield pinout](Images/lcd_pinout.png)
 
-    **GND** should be connected to the ground of Arduino.
+   **GND** should be connected to the ground of Arduino.
 
-    **VCC** is the power supply for the LCD which we connect the 5 volts pin on the Arduino.
+   **VCC** is the power supply for the LCD which we connect the 5 volts pin on the Arduino.
 
-    **VE** (LCD Contrast) controls the contrast and brightness of the LCD. Using a simple voltage divider with a potentiometer, we can make fine adjustments to the contrast.
+   **VE** (LCD Contrast) controls the contrast and brightness of the LCD. Using a simple voltage divider with a potentiometer, we can make fine adjustments to the contrast.
 
-    **RS** (Register Select) pin lets the Arduino tell the LCD whether it is sending commands or the data. Basically this pin is used to differentiate commands from the data.
-    When a command is given on the LCD, we select the command register (RS = 0) and when data is sent to the LCD for display, we select the data register (RS = 1). A command is an instruction entered on the LCD in order to perform the required function. In order to display textual information, data is send to LCD.
+   **RS** (Register Select) pin lets the Arduino tell the LCD whether it is sending commands or the data. Basically this pin is used to differentiate commands from the data.
+   When a command is given on the LCD, we select the command register (RS = 0) and when data is sent to the LCD for display, we select the data register (RS = 1). A command is an instruction entered on the LCD in order to perform the required function. In order to display textual information, data is send to LCD.
 
-    **R/W** (Read/Write) pin on the LCD is to control whether or not you’re reading data from the LCD or writing data to the LCD. Since we’re just using this LCD as an OUTPUT device, we’re going to tie this pin LOW.
+   **R/W** (Read/Write) pin on the LCD is to control whether or not you’re reading data from the LCD or writing data to the LCD. Since we’re just using this LCD as an OUTPUT device, we’re going to tie this pin LOW.
 
-    **E** (Enable) pin is used to enable the display. When this pin is set to LOW, the LCD does not care what is happening with R/W, RS, and the data bus lines; when this pin is set to HIGH, the LCD is processing the incoming data.
+   **E** (Enable) pin is used to enable the display. When this pin is set to LOW, the LCD does not care what is happening with R/W, RS, and the data bus lines; when this pin is set to HIGH, the LCD is processing the incoming data.
 
-    **D0-D7** (Data Bus) are the pins that carries the 8 bit data we send to the display. For example, if we want to see the uppercase ‘A’ character on the display we will set these pins to 0100 0001(according to the ASCII table) to the LCD.
+   **D0-D7** (Data Bus) are the pins that carries the 8 bit data we send to the display. For example, if we want to see the uppercase ‘A’ character on the display we will set these pins to 0100 0001(according to the ASCII table) to the LCD.
 
-    **A-K** (Anode & Cathode) pins are used to control the backlight of the LCD.
+   **A-K** (Anode & Cathode) pins are used to control the backlight of the LCD.
 
    | **LCD signal(s)** | **AVR pin(s)** | **Description** |
    | :-: | :-: | :-- |
@@ -33,7 +33,7 @@
 
 2. ASCII stands for American Standard Code for Information Interchange. Computers can only understand numbers, so an ASCII code is the numerical representation of a character such as 'a' or '@' or an action of some sort.
 
-    Below is the ASCII character table and this includes descriptions for uppercase letters `A` to `Z`, lowercase letters `a` to `z`, and numbers `0` to `9`:
+   Below is the ASCII character table and this includes descriptions for uppercase letters `A` to `Z`, lowercase letters `a` to `z`, and numbers `0` to `9`:
 
    | **Char** | **Decimal** | **Hexadecimal** | **Char** | **Decimal** | **Hexadecimal** |
    | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -64,7 +64,7 @@
    | `Y` | 89 | 0x59 | `y` | 121 | 0x79 |
    | `Z` | 90 | 0x5A | `z` | 122 | 0x7A |
 
-    | **Char** | **Decimal** | **Hexadecimal** |
+   | **Char** | **Decimal** | **Hexadecimal** |
    | :-: | :-: | :-: |
    | `0` | 48 | 0x30 |
    | `1` | 49 | 0x31 |
@@ -81,12 +81,12 @@
 
 According to [online manual of LCD library](http://www.peterfleury.epizy.com/doxygen/avr-gcc-libraries/group__pfleury__lcd.html) by Peter Fleury:
 
-   | **Function name** | **Function parameters** | **Description** | **Example** |
-   | :-- | :-- | :-- | :-- |
-   | `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off<br>Display on, cursor off<br>Display on, cursor on<br>Display on, cursor on flashing | `lcd_init(LCD_DISP_OFF);`<br>`lcd_init(LCD_DISP_ON);`<br>`lcd_init(LCD_DISP_ON_CURSOR);`<br>`lcd_init(LCD_DISP_ON_CURSOR_BLINK);` |
-   | `lcd_clrscr` | `void` | Clear display and set cursor to home position | `lcd_clrscr();` |
-   | `lcd_gotoxy` | `uint8_t x`<br><br>`uint8_t y`<br><br> | Display character at current cursor position | `lcd_gotoxy(0, 0);` |
-   | `lcd_putc` | `char c` | Character to be displayed | `lcd_putc('C');` |
-   | `lcd_puts` | `const char * s` | Display string without auto linefeed |   `lcd_puts('Hello World');` |
-   | `lcd_command` |  `uint8_t cmd` | Send LCD controller instruction command | |
-   | `lcd_data` | `uint8_t data` | Send data byte to LCD controller | |
+| **Function name** | **Function parameters** | **Description** | **Example** |
+| :-- | :-- | :-- | :-- |
+| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off<br>Display on, cursor off<br>Display on, cursor on<br>Display on, cursor on flashing | `lcd_init(LCD_DISP_OFF);`<br>`lcd_init(LCD_DISP_ON);`<br>`lcd_init(LCD_DISP_ON_CURSOR);`<br>`lcd_init(LCD_DISP_ON_CURSOR_BLINK);` |
+| `lcd_clrscr` | `void` | Clear display and set cursor to home position | `lcd_clrscr();` |
+| `lcd_gotoxy` | `uint8_t x`<br><br>`uint8_t y`<br><br> | Display character at current cursor position | `lcd_gotoxy(0, 0);` |
+| `lcd_putc` | `char c` | Character to be displayed | `lcd_putc('C');` |
+| `lcd_puts` | `const char * s` | Display string without auto linefeed |   `lcd_puts('Hello World');` |
+| `lcd_command` |  `uint8_t cmd` | Send LCD controller instruction command | |
+| `lcd_data` | `uint8_t data` | Send data byte to LCD controller | |

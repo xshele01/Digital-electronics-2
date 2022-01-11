@@ -4,27 +4,29 @@ My `Digital-electronics-2` GitHub repository:
 
 https://github.com/xshele01/Digital-electronics-2
 
+
 ### Blink example
 
 1. C programming language contains following binary operators:
 
    | **Opetaor**| **Symbol** | **Form** | **Operation** |
    | :-: | :-: | :-: | :-: |
-   | bitwise OR | `|` | `x | y` | each bit in x OR each bit in y |
-   | bitwise AND| `&` | `x & y` | each bit in x AND each bit in y |
-   | bitwise XOR| `^` | `x ^ y` | each bit in x XOR each bit in y |
-   | bitwise NOT| `~` | `~x` | all bits in x flipped |
-   | left shift | `<<` | `x << y` | all bits in x shifted left y bits |
-   | right shift| `>>` | `x >> y` | all bits in x shifted right y bits |
+   | bitwise OR | `|` | `x | y` | each bit in `x` OR each bit in `y` |
+   | bitwise AND| `&` | `x & y` | each bit in `x` AND each bit in `y` |
+   | bitwise XOR| `^` | `x ^ y` | each bit in `x` XOR each bit in `y` |
+   | bitwise NOT| `~` | `~x` | all bits in `x` flipped |
+   | left shift | `<<` | `x << y` | all bits in `x` shifted left `y` bits |
+   | right shift| `>>` | `x >> y` | all bits in `x` shifted right `y` bits |
 
 2. Truth table for operators `|`, `&`, `^`, `~`:
 
-| **b** | **a** |**b or a** | **b and a** | **b xor a** | **not b** |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| 0 | 0 | 0 | 0 | 0 | 1 |
-| 0 | 1 | 1 | 0 | 1 | 1 |
-| 1 | 0 | 1 | 0 | 1 | 0 |
-| 1 | 1 | 1 | 1 | 0 | 0 |
+    | **b** | **a** |**b or a** | **b and a** | **b xor a** | **not b** |
+    | :-: | :-: | :-: | :-: | :-: | :-: |
+    | 0 | 0 | 0 | 0 | 0 | 1 |
+    | 0 | 1 | 1 | 0 | 1 | 1 |
+    | 1 | 0 | 1 | 0 | 1 | 0 |
+    | 1 | 1 | 1 | 1 | 0 | 0 |
+
 
 ### Morse code
 

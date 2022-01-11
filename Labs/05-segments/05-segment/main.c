@@ -32,12 +32,12 @@ int main(void)
     // Configure SSD signals
     SEG_init();
 
-    // Configure 16-bit Timer/Counter1 for Decimal counter
+    // Configure 16-bit Timer/Counter1 for decimal counter
     // Set the overflow prescaler to 262 ms and enable interrupt
     TIM1_overflow_262ms();
     TIM1_overflow_interrupt_enable();
 
-    // Configure 8-bit Timer/Counter0 for Decimal counter
+    // Configure 8-bit Timer/Counter0 for display switching
     // Set the overflow prescaler to 4 ms and enable interrupt
     TIM0_overflow_4ms();
     TIM0_overflow_interrupt_enable();
@@ -129,6 +129,8 @@ ISR(TIMER0_OVF_vect)
         case 3:
             SEG_update_shift_regs(count_3, pos);
             pos = 0;
+            break;
+        default:
             break;
     }
 }

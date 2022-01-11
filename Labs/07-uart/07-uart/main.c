@@ -47,9 +47,7 @@ uint8_t get_parity(uint16_t data, uint8_t type)
     for (int8_t i = 0; i < sizeof(data)*8; ++i)
     {
         if (data & 1)
-        {
             parity = !parity;
-        }
         
         data = data >> 1;
     }
@@ -73,11 +71,11 @@ int main(void)
     lcd_gotoxy(8, 1); lcd_puts("none");    // Put button name here
 
     // Configure ADC to convert PC0[A0] analog value
-    // Set ADC reference to AVcc
+    // Set ADC reference to AVcc with external capacitor
     ADMUX |= (1 << REFS0);
     ADMUX &= ~(1 << REFS1);
    
-    // Set input channel to ADC0
+    // Set input channel to ADC0 (default value)
     ADMUX &= ~((1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (1 << MUX3));
 
     // Enable ADC module
@@ -90,8 +88,8 @@ int main(void)
     ADCSRA |= (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2);
 
     // Configure 16-bit Timer/Counter1 to start ADC conversion
-    // Set prescaler to 262 ms and enable overflow interrupt
-    TIM1_overflow_262ms();
+    // Set prescaler to 1 s and enable overflow interrupt
+    TIM1_overflow_1s();
     TIM1_overflow_interrupt_enable();
 
     // Initialize UART to asynchronous, 8N1, 9600
@@ -134,7 +132,7 @@ ISR(ADC_vect)
     char lcd_string[8] = "0000";
 
     value = ADC;                    // Copy ADC result to 32-bit variable
-    mV = round((value*5000)/1023);  // Convert ADC value to mV
+    mV = round((value*5*1000)/1023);  // Convert ADC value to mV
 
     itoa(mV, lcd_string, 10);       // Convert mV value to string
     

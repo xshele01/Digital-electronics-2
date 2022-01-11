@@ -201,9 +201,7 @@ ISR(TIMER1_OVF_vect)
     }
     
     if (pointer == strlen(running_text) - 4)
-    {
         pointer = 0;
-    }
     
     lcd_gotoxy(11, 1);
     lcd_puts(lcd_text);
@@ -244,9 +242,13 @@ ISR(TIMER2_OVF_vect)
         itoa(secs, lcd_str, 10);
         
         if (secs < 10)
+        {
             lcd_gotoxy(5, 0);
+        }
         else if (secs < 60)
+        {
             lcd_gotoxy(4, 0);
+        }
         else
         {
             secs = 0;
@@ -264,9 +266,13 @@ ISR(TIMER2_OVF_vect)
         itoa(mins, lcd_str, 10);
         
         if (mins < 10)
+        {
             lcd_gotoxy(2, 0);
+        }
         else if (mins < 60)
+        {
             lcd_gotoxy(1, 0);
+        }
         else
         {
             lcd_gotoxy(1, 0);

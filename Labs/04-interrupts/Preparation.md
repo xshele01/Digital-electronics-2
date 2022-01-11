@@ -4,29 +4,30 @@
 
 1. Overflow times in seconds for three Timer/Counter modules that contain ATmega328P if CPU clock frequency is 16 MHz:
 
-| **Module** | **Number of bits** | **1** | **8** | **32** | **64** | **128** | **256** | **1024** |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Timer/Counter0 | 8  | 16u | 128u | -- | 1024u | -- | 4128u | 16384u |
-| Timer/Counter1 | 16 | 4096u | 32768u | -- | 262144u | -- | 1056768u | 4194304u |
-| Timer/Counter2 | 8  | 16u | 128u | 512u | 1024u | 2048u | 4128u | 16384u |
+    | **Module** | **Number of bits** | **1** | **8** | **32** | **64** | **128** | **256** | **1024** |
+    | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+    | Timer/Counter0 | 8  | 16u | 128u | -- | 1024u | -- | 4128u | 16384u |
+    | Timer/Counter1 | 16 | 4096u | 32768u | -- | 262144u | -- | 1056768u | 4194304u |
+    | Timer/Counter2 | 8  | 16u | 128u | 512u | 1024u | 2048u | 4128u | 16384u |
 
-1. Connection of four LEDs of [Multi-function shield](../../Docs/arduino_shield.pdf):
+2. Connection of four LEDs of [Multi-function shield](../../Docs/arduino_shield.pdf):
 
-| **LED** | **Pin** |
-| :-: | :-: |
-| D1 | PB5 |
-| D2 | PB4 |
-| D3 | PB3 |
-| D4 | PB2 |
+    | **LED** | **Pin** |
+    | :-: | :-: |
+    | D1 | PB5 |
+    | D2 | PB4 |
+    | D3 | PB3 |
+    | D4 | PB2 |
 
-Connection of three push buttons and reset of [Multi-function shield](../../Docs/arduino_shield.pdf):
+    Connection of three push buttons and reset of [Multi-function shield](../../Docs/arduino_shield.pdf):
 
-| **Push Button** | **Pin** |
-| :-: | :-: |
-| S1-A1 | PC1 |
-| S2-A2 | PC2 |
-| S3-A3 | PC3 |
-| RESET | RESET |
+    | **Push Button** | **Pin** |
+    | :-: | :-: |
+    | S1-A1 | PC1 |
+    | S2-A2 | PC2 |
+    | S3-A3 | PC3 |
+    | RESET | RESET |
+
 
 ### Part 2: Timers
 
@@ -37,6 +38,7 @@ The timer modules can be configured with several special purpose registers:
 | Timer/Counter0 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable | TCCR0B<br><br>TCNT0<br>TIMSK0 | CS02, CS01, CS00<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT0[7:0]<br>TOIE0 (1: enable, 0: disable) |
 | Timer/Counter1 | Prescaler<br><br>16-bit data value<br>Overflow interrupt enable | TCCR1B<br><br>TCNT1H, TCNT1L<br>TIMSK1 | CS12, CS11, CS10<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT1[15:0]<br>TOIE1 (1: enable, 0: disable) |
 | Timer/Counter2 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable | TCCR2B<br><br>TCNT2<br>TIMSK2 | CS22, CS21, CS20<br>(000: stopped, 001: 1, 010: 8, 011: 32, 100: 64, 101: 128, 110: 256, 111: 1024)<br>TCNT2[7:0]<br>TOIE2 (1: enable, 0: disable) |
+
 
 ### Part 3: Polling and Interrupts
 
@@ -59,6 +61,7 @@ Selected interrupt sources in ATmega328:
 | 0x002A | ADC | `ADC_vect` | ADC Conversion Complete |
 | 0x0030 | TWI | `TWI_vect` | 2-wire Serial Interface |
 
+
 ### Part 5: PWM (Pulse Width Modulation)
 
 Arduino Uno pins that can be used to generate the PWM signal by internal timer modules:
@@ -72,9 +75,10 @@ Arduino Uno pins that can be used to generate the PWM signal by internal timer m
 | Timer/Counter2 | OC2A | PB3 | 11 |
 |                | OC2B | PD3 | 3 |
 
+
 ### Experiments on your own
 
-According to the [ATmega328P datasheet](../../Docs/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf), the main differences between:
+According to the [ATmega328P datasheet](../../Docs/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf), the main differences between different PWM modes are:
 
 *  In **normal mode** the counting direction is always up (incrementing), and no counter clear is performed. Counter overflows back to the start. 
 *  In **Clear Timer on Compare** or **CTC mode** alows to manipulate the counter resolution.

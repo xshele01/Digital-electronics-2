@@ -21,37 +21,37 @@
 /* Variables ---------------------------------------------------------*/
 // Active-low digit 0 to 9
 uint8_t segment_value[] = {
-	// a b c d e f g DP
-	0b00000011,     // Digit 0
-	0b10011111,     // Digit 1
-	0b00100101,     // Digit 2
-	0b00001101,     // Digit 3
-	0b10011001,     // Digit 4
-	0b01001001,     // Digit 5
-	0b01000001,     // Digit 6
-	0b00011111,     // Digit 7
-	0b00000001,     // Digit 8
-	0b00011001,     // Digit 9
-	
-	0b00000010,     // Digit 0.
-	0b10011110,     // Digit 1.
-	0b00100100,     // Digit 2.
-	0b00001100,     // Digit 3.
-	0b10011000,     // Digit 4.
-	0b01001000,     // Digit 5.
-	0b01000000,     // Digit 6.
-	0b00011110,     // Digit 7.
-	0b00000000,     // Digit 8.
-	0b00011000      // Digit 9.
+    // a b c d e f g DP
+    0b00000011,     // Digit 0
+    0b10011111,     // Digit 1
+    0b00100101,     // Digit 2
+    0b00001101,     // Digit 3
+    0b10011001,     // Digit 4
+    0b01001001,     // Digit 5
+    0b01000001,     // Digit 6
+    0b00011111,     // Digit 7
+    0b00000001,     // Digit 8
+    0b00011001,     // Digit 9
+    
+    0b00000010,     // Digit 0.
+    0b10011110,     // Digit 1.
+    0b00100100,     // Digit 2.
+    0b00001100,     // Digit 3.
+    0b10011000,     // Digit 4.
+    0b01001000,     // Digit 5.
+    0b01000000,     // Digit 6.
+    0b00011110,     // Digit 7.
+    0b00000000,     // Digit 8.
+    0b00011000      // Digit 9.
 };
 
 // Active-high position 0 to 3
 uint8_t segment_position[] = {
-	// p3 p2 p1 p0
-	0b00010000,     // Position 0
-	0b00100000,     // Position 1
-	0b01000000,     // Position 2
-	0b10000000      // Position 3
+    // p3 p2 p1 p0
+    0b00010000,     // Position 0
+    0b00100000,     // Position 1
+    0b01000000,     // Position 2
+    0b10000000      // Position 3
 };
 
 /* Function definitions ----------------------------------------------*/
@@ -78,8 +78,8 @@ void SEG_init(void)
  **********************************************************************/
 void SEG_update_shift_regs(uint8_t segments, uint8_t position)
 {
-	uint8_t bit_number;
-	
+    uint8_t bit_number;
+    
     segments = segment_value[segments];     // 0, 1, ..., 9
     position = segment_position[position];  // 0, 1, 2, 3
     
@@ -95,14 +95,14 @@ void SEG_update_shift_regs(uint8_t segments, uint8_t position)
     // a b c d e f g DP (active low values)
     for (bit_number = 0; bit_number < 8; ++bit_number)
     {
-        // Test LSB of "segments" by & (faster) or % (slower) and...
+        // Test LSB of "segments" and...
         if (!(segments & 0b00000001))
         // ...output DATA value
             GPIO_write_low(&PORTB, SEG_DATA);
         else
             GPIO_write_high(&PORTB, SEG_DATA);
 
-		// Generate clock signal
+        // Generate clock signal
         SEG_clk_2us();
         
         // Shift "segments"
@@ -113,14 +113,14 @@ void SEG_update_shift_regs(uint8_t segments, uint8_t position)
     // p3 p2 p1 p0 . . . . (active high values)
     for (bit_number = 0; bit_number < 8; ++bit_number)
     {
-        // Test LSB of "position" by & (faster) or % (slower) and...
+        // Test LSB of "position" and...
         if (position & 0b00000001)
         // ...output DATA value
             GPIO_write_high(&PORTB, SEG_DATA);
         else
             GPIO_write_low(&PORTB, SEG_DATA);
             
-		// Generate clock signal	
+        // Generate clock signal	
         SEG_clk_2us();
 
         // Shift "position"
@@ -150,41 +150,41 @@ void SEG_clear()
     
     // Wait 1 us
     _delay_us(1);
-	
+    
     for (uint8_t bit_number = 0; bit_number < 16; ++bit_number)
     {
-		// Pull output DATA low
-		GPIO_write_low(&PORTB, SEG_DATA);
+        // Pull output DATA low
+        GPIO_write_low(&PORTB, SEG_DATA);
 
-		// Generate clock signal
-	    SEG_clk_2us();
+        // Generate clock signal
+        SEG_clk_2us();
     }
-	
-	// Pull LATCH high
-	GPIO_write_high(&PORTD, SEG_LATCH);
-	
-	// Wait 1 us
-	_delay_us(1);
+    
+    // Pull LATCH high
+    GPIO_write_high(&PORTD, SEG_LATCH);
+    
+    // Wait 1 us
+    _delay_us(1);
 }
 
 /**********************************************************************
  * Function: SEG_clk_2us()
  * Purpose:  Generate 1 period of a clock signal with a frequency of 
- *			 500 kHz
+ *           500 kHz
  * Input:    none
  * Returns:  none
  **********************************************************************/
 void SEG_clk_2us()
 {
-	// Wait 1 us
-	_delay_us(1);
-	
-	// Pull CLK high	
-	GPIO_write_high(&PORTD, SEG_CLK);
-		    
-	// Wait 1 us
-	_delay_us(1);
-		    
-	// Pull CLK low
-	GPIO_write_low(&PORTD, SEG_CLK);
+    // Wait 1 us
+    _delay_us(1);
+    
+    // Pull CLK high	
+    GPIO_write_high(&PORTD, SEG_CLK);
+            
+    // Wait 1 us
+    _delay_us(1);
+            
+    // Pull CLK low
+    GPIO_write_low(&PORTD, SEG_CLK);
 }

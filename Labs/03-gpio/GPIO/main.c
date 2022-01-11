@@ -39,8 +39,8 @@ int main(void)
     GPIO_write_low(&PORTB, LED_GREEN);
 
     // Configure the second LED at port C
-     GPIO_config_output(&DDRC, LED_BREAD);
-     GPIO_write_low(&PORTC, LED_BREAD);
+    GPIO_config_output(&DDRC, LED_BREAD);
+    GPIO_write_low(&PORTC, LED_BREAD);
 
     // Configure Push button at port D and enable internal pull-up resistor
     GPIO_config_input_pullup(&DDRD, PUSH_BTN);
@@ -50,19 +50,19 @@ int main(void)
     {
         if (!GPIO_read(&PIND, PUSH_BTN))
         {
-			// Pause several milliseconds
-			 _delay_ms(BLINK_DELAY);
-			 
-			 GPIO_toggle(&PORTB, LED_GREEN);
-			 GPIO_toggle(&PORTC, LED_BREAD);
-			 
+            // Pause several milliseconds
+            _delay_ms(BLINK_DELAY);
+            
+            GPIO_toggle(&PORTB, LED_GREEN);
+            GPIO_toggle(&PORTC, LED_BREAD);
+             
             while (!GPIO_read(&PIND, PUSH_BTN))
-			{
-				 _delay_ms(BLINK_DELAY);
-				 
-				GPIO_toggle(&PORTB, LED_GREEN);
-				GPIO_toggle(&PORTC, LED_BREAD);
-			}
+            {
+                _delay_ms(BLINK_DELAY);
+                    
+                GPIO_toggle(&PORTB, LED_GREEN);
+                GPIO_toggle(&PORTC, LED_BREAD);
+            }
         }
     }
 

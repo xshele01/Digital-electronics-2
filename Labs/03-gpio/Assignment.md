@@ -4,6 +4,7 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 https://github.com/xshele01/Digital-electronics-2
 
+
 ### Data types in C
 
 | **Data type** | **Number of bits** | **Range** | **Description** |
@@ -15,6 +16,7 @@ https://github.com/xshele01/Digital-electronics-2
 | `float`    | 32 | -3.4e+38 to 3.4e+38 | Single-precision floating-point |
 | `void`     | - | - | No type |
 
+
 ### GPIO library
 
 1. Difference between function declaration and definition in C:
@@ -23,7 +25,7 @@ https://github.com/xshele01/Digital-electronics-2
 
 2. Part of the C code, which uses my GPIO library to toggle LEDs when a push button is pressed. Otherwise, the values of the LEDs do not change. The button is connected to port D:
 
-```c
+    ```c
     // Configure Push button at port D and enable internal pull-up resistor
     GPIO_config_input_pullup(&DDRD, PUSH_BTN);
 
@@ -36,16 +38,17 @@ https://github.com/xshele01/Digital-electronics-2
             GPIO_toggle(&PORTC, LED_BREAD);
             
             while (!GPIO_read(&PIND, PUSH_BTN))
-               continue;
+                continue;
         }
     }
-```
+    ```
  
+
 ### Traffic light
 
-1. Scheme of traffic light application (connection of AVR device, LEDs, resistors, push button and supply voltage):
+Scheme of traffic light application (connection of AVR device, LEDs, resistors, push button and supply voltage):
 
-   ![Scheme of traffic light application](Images/schemeit-project.svg)
+![Scheme of traffic light application](Images/schemeit-project.svg)
 
 | **Component** | **Description** |
 | :-: | :-: |

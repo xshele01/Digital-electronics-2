@@ -4,26 +4,27 @@ Link to my `Digital-electronics-2` GitHub repository:
 
 https://github.com/xshele01/Digital-electronics-2
 
+
 ## Active-low and active-high LEDs
 
 1. According to the AVR manual:
 
-| **DDRB** | **Description** |
-| :-: | :-- |
-| 0 | Input pin |
-| 1 | Output pin |
+    | **DDRB** | **Description** |
+    | :-: | :-- |
+    | 0 | Input pin |
+    | 1 | Output pin |
 
-| **PORTB** | **Description** |
-| :-: | :-- |
-| 0 | Output low value |
-| 1 | Output high value |
+    | **PORTB** | **Description** |
+    | :-: | :-- |
+    | 0 | Output LOW value |
+    | 1 | Output HIGH value |
 
-| **DDRB** | **PORTB** | **Direction** | **Internal pull-up resistor** | **Description** |
-| :-: | :-: | :-: | :-: | :-- |
-| 0 | 0 | input | no | Tri-state, high-impedance |
-| 0 | 1 | input | yes  | Pxn will source current if ext. pulled low |
-| 1 | 0 | output | no | Output Low (Sink) |
-| 1 | 1 | output | no | Output High (Source) |
+    | **DDRB** | **PORTB** | **Direction** | **Internal pull-up resistor** | **Description** |
+    | :-: | :-: | :-: | :-: | :-- |
+    | 0 | 0 | input | no | Tri-state, high-impedance |
+    | 0 | 1 | input | yes  | Pxn will source current if ext. pulled low |
+    | 1 | 0 | output | no | Output Low (Sink) |
+    | 1 | 1 | output | no | Output High (Source) |
 
 1. Part of the C code, which blinks alternately with a pair of LEDs; one LED is connected to port B and the other to port C:
 
@@ -57,32 +58,34 @@ int main(void)
 }
 ```
 
+
 ## Push button
 
-1. Part of the C code, wich toggles LEDs when a push button is pressed. Otherwise, the values of the LEDs do not change. The button is connected to port D:
+Part of the C code, wich toggles LEDs when a push button is pressed. Otherwise, the values of the LEDs do not change. The button is connected to port D:
 
 ```c
-    // Configure Push button at port D and enable internal pull-up resistor
-    DDRD = DDRD & ~(1<<PUSH_BREADBOAD);
-    PORTD = PORTD | (1<<PUSH_BREADBOAD);
+// Configure Push button at port D and enable internal pull-up resistor
+DDRD = DDRD & ~(1<<PUSH_BREADBOAD);
+PORTD = PORTD | (1<<PUSH_BREADBOAD);
 
-    // Infinite loop
-    while (1)
+// Infinite loop
+while (1)
+{
+    // Pause several milliseconds
+    _delay_ms(BLINK_DELAY);
+
+    if(bit_is_clear(PIND, PUSH_BREADBOAD))
     {
-        // Pause several milliseconds
-        _delay_ms(BLINK_DELAY);
-
-        if(bit_is_clear(PIND, PUSH_BREADBOAD))
-        {
-            PORTB = PORTB ^ (1<<LED_GREEN);
-            PORTC = PORTC ^ (1<<LED_BREADBOAD);
-            loop_until_bit_is_set(PIND, PUSH_BREADBOAD);
-        }
+        PORTB = PORTB ^ (1<<LED_GREEN);
+        PORTC = PORTC ^ (1<<LED_BREADBOAD);
+        loop_until_bit_is_set(PIND, PUSH_BREADBOAD);
     }
+}
 ```
+
 
 ## Knight Rider
 
-1. Scheme of Knight Rider application (connection of AVR device, LEDs, resistors, push button and supply voltage):
+Scheme of Knight Rider application (connection of AVR device, LEDs, resistors, push button and supply voltage):
 
 ![Scheme of Knight Rider application](Images/knight_rider.svg)

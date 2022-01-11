@@ -49,13 +49,9 @@ int main(void)
     PORTD = PORTD | (1<< PUSH);
     
     while (1) 
-    {
         if (buttonPushed(&PIND, PUSH))
-        {
             while (1) 
-            {
                 for (int i = 0; i < 8; ++i)
-                {
                     if (i < 4)
                     {
                         PORTC = (PORTC << 1);
@@ -66,9 +62,5 @@ int main(void)
                         PORTC = (PORTC >> 1);
                         _delay_ms(500);
                     }
-                }
-            }
-        }
-    }
 }
 

@@ -11,19 +11,19 @@ https://github.com/xshele01/Digital-electronics-2
 
 2. Picture of time signals between ATmega328P and LCD keypad shield (HD44780 driver) when transmitting three character data `De2`:
 
-![Figure of signals representing characters 'D' 'E' and '2'](Images/wavedrom.svg)
+    ![Figure of signals representing characters 'D' 'E' and '2'](Images/wavedrom.svg)
 
 
 ### Stopwatch
 
-1. Flowchart figure for `TIMER2_OVF_vect` interrupt service routine which overflows every 16&nbsp;ms but it updates the stopwatch LCD approximately every 100&nbsp;ms (6 x 16&nbsp;ms = 100&nbsp;ms). Displays tenths of a second and seconds `00:seconds.tenths`. Stopwatch counts from `00:00.0` to `00:59.9` and then starts again:
+Flowchart figure for `TIMER2_OVF_vect` interrupt service routine which overflows every 16&nbsp;ms but it updates the stopwatch LCD approximately every 100&nbsp;ms (6 x 16&nbsp;ms = 100&nbsp;ms). Displays tenths of a second and seconds `00:seconds.tenths`. Stopwatch counts from `00:00.0` to `00:59.9` and then starts again:
 
 ![Flowchart figure](Images/TIMER2_OVF_vect.svg)
 
 
 ### Custom characters
 
-1. Code listing of two custom character definitions:
+Code listing of two custom character definitions:
 
 ```c
 /* Variables ---------------------------------------------------------*/
@@ -59,6 +59,6 @@ A kitchen alarm with an LCD, one LED and three push buttons: start, +1 minute, -
 The countdown value is shown on the display in the form of mm.ss (minutes.seconds). 
 At the end of the countdown, the LED will start blinking.
 
-1. Schematic of the kitchen alarm:
+Schematic:
 
 ![Schematic of the kitchen alarm](Images/circuit.svg)

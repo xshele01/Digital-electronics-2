@@ -27,15 +27,20 @@ int main(void)
 {   
     // Set Compare output mode, Fast PWM to non-inverting mode
     TCCR1A |= (1 << COM1A1) | (1 << COM1B1);
+    // Not needed, default value is already 0
     TCCR1A &= ~((1 << COM1A0) | (1 << COM1B0));
     
     // Select Waveform generation to Fast PWM, 10-bit
     TCCR1A |= (1 << WGM10) | (1 << WGM11);
-    TCCR1B |= (1 << WGM12); TCCR1B &= ~(1 << WGM13);
-    
-    // Set clock prescaler to 8
-    TIM1_overflow_33ms();
-    
+    TCCR1B |= (1 << WGM12);
+    // Not needed, default value is already 0
+    TCCR1B &= ~(1 << WGM13);
+
+    // Set overflow prescaler to 8
+    TCCR1B |= (1 << CS11);
+    // Not needed, default value is already 0
+    TCCR1B &= ~((1 << CS12) | (1 << CS10)); 
+
     // Set default duty cycle in OCR1B to 50%
     OCR1B = 0x01FF;
     

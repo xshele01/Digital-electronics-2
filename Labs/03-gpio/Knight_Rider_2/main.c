@@ -41,9 +41,8 @@ int main(void)
     // Configure LEDs at port C
     // Set first 5 pins as output in Data Direction Register
     for (int pin = 0; pin < 5; ++pin)
-    {
         GPIO_config_output(&DDRC, pin);
-    }
+        
     // ...and turn first LED on in Data Register
     GPIO_write_high(&PORTC, 0);
     
@@ -51,14 +50,10 @@ int main(void)
     GPIO_config_input_pullup(&DDRD, PUSH);
     
     while (1) 
-    {
         if (buttonPushed(&PIND, PUSH))
-        {
             while (1) 
-            {
                 // Loops through 5 LEDs
                 for (int i = 0; i < 8; ++i)
-                {
                     if (i < 4)
                     {
                         GPIO_toggle(&PORTC, i);
@@ -71,8 +66,4 @@ int main(void)
                         GPIO_toggle(&PORTC, 8-i-1);
                         _delay_ms(500);
                     }
-                }
-            }
-        }
-    }
 }
